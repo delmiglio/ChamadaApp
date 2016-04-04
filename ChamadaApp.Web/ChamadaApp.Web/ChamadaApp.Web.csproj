@@ -162,7 +162,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>4475</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:4475/</IISUrl>
+          <IISUrl>http://localhost:8070/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:8070/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
