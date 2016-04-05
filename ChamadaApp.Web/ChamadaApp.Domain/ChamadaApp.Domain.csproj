@@ -41,10 +41,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VO\AlunoVO.cs" />
+    <Compile Include="VO\CursoVO.cs" />
+    <Compile Include="VO\MateriaVO.cs" />
+    <Compile Include="VO\ModuloVO.cs" />
+    <Compile Include="VO\ProfessorVO.cs" />
+    <Compile Include="VO\SitAlunoVO.cs" />
+    <Compile Include="VO\SitAlunoChamadaVO.cs" />
+    <Compile Include="VO\SitChamadaVO.cs" />
+    <Compile Include="VO\SitTurmaVO.cs" />
+    <Compile Include="VO\TpUsuarioVO.cs" />
+    <Compile Include="VO\UsuarioVO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DAO\" />
-    <Folder Include="VO\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
