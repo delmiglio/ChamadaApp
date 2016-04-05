@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChamadaApp.Web", "ChamadaAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChamadaApp.Domain", "ChamadaApp.Domain\ChamadaApp.Domain.csproj", "{B731DEB4-BFFA-4AE4-937C-88F040C019C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChamadaApp.API", "ChamadaApp.API\ChamadaApp.API.csproj", "{AE052B07-7F7F-42D6-9984-3C390647453D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChamadaApp.Api", "ChamadaApp.Api\ChamadaApp.Api.csproj", "{22F7F655-E0FD-4992-B7C8-35216493C469}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{B731DEB4-BFFA-4AE4-937C-88F040C019C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B731DEB4-BFFA-4AE4-937C-88F040C019C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B731DEB4-BFFA-4AE4-937C-88F040C019C4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AE052B07-7F7F-42D6-9984-3C390647453D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE052B07-7F7F-42D6-9984-3C390647453D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE052B07-7F7F-42D6-9984-3C390647453D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE052B07-7F7F-42D6-9984-3C390647453D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22F7F655-E0FD-4992-B7C8-35216493C469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22F7F655-E0FD-4992-B7C8-35216493C469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22F7F655-E0FD-4992-B7C8-35216493C469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22F7F655-E0FD-4992-B7C8-35216493C469}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

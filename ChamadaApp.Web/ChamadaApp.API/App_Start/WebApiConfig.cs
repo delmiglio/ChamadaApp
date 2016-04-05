@@ -1,17 +1,15 @@
-﻿using Newtonsoft.Json.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
-using System.Web.Http.Cors;
 
-namespace ChamadaApp.API
+namespace ChamadaApp.Api
 {
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-
-            //CORS
-            config.EnableCors(new EnableCorsAttribute("http://localhost:8070", "*", "*"));
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -21,10 +19,6 @@ namespace ChamadaApp.API
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-
-            // Necessário Para Habilitar o Retorno de JSON neste formato: matheusSouzaLima: 
-            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
         }
     }
 }
