@@ -3,11 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChamadaApp.Web", "ChamadaApp.Web\ChamadaApp.Web.csproj", "{EC6195B0-93E6-4C0B-A3F5-4A894F8EC959}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChamadaApp.Domain", "ChamadaApp.Domain\ChamadaApp.Domain.csproj", "{B731DEB4-BFFA-4AE4-937C-88F040C019C4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChamadaApp.Api", "ChamadaApp.Api\ChamadaApp.Api.csproj", "{22F7F655-E0FD-4992-B7C8-35216493C469}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EC6195B0-93E6-4C0B-A3F5-4A894F8EC959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC6195B0-93E6-4C0B-A3F5-4A894F8EC959}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC6195B0-93E6-4C0B-A3F5-4A894F8EC959}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC6195B0-93E6-4C0B-A3F5-4A894F8EC959}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B731DEB4-BFFA-4AE4-937C-88F040C019C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B731DEB4-BFFA-4AE4-937C-88F040C019C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B731DEB4-BFFA-4AE4-937C-88F040C019C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B731DEB4-BFFA-4AE4-937C-88F040C019C4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{22F7F655-E0FD-4992-B7C8-35216493C469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22F7F655-E0FD-4992-B7C8-35216493C469}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22F7F655-E0FD-4992-B7C8-35216493C469}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22F7F655-E0FD-4992-B7C8-35216493C469}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
