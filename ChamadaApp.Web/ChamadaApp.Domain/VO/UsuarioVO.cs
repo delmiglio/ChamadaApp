@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChamadaApp.Domain.VO
 {
-    class UsuarioVO
+    public class UsuarioVO
     {
         public UsuarioVO()
         {

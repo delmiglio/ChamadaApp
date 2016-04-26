@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\ConexaoDAO.cs" />
+    <Compile Include="DAO\LoginDAO.cs" />
+    <Compile Include="DAO\MetodosDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VO\AlunoVO.cs" />
     <Compile Include="VO\CursoVO.cs" />
