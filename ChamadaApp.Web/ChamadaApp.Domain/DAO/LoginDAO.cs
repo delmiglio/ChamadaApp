@@ -6,9 +6,10 @@ namespace ChamadaApp.Domain.DAO
 {
     public class LoginDAO
     {
-        public static UsuarioVO GetUsuarioRA(string ra)
+        public static UsuarioVO GetUsuarioRA(string login, string senha)
         {
-            string getLogin = String.Format("SELECT * FROM USUARIO WHERE USUARIO.LOGIN = {0}", ra);
+            string getLogin = String.Format("SELECT * FROM USUARIO WHERE USUARIO.LOGIN = {0} AND " +
+                                            "USUARIO.SENHA = {1}", login, senha);
 
             DataTable data = MetodosDAO.ExecutaSelect(getLogin);
 
