@@ -10,6 +10,5 @@ C:\Users\guide\Documents\Visual Studio 2015\Projects\ChamadaApp.ModuloWeb\Chamad
 C:\Users\guide\Documents\Visual Studio 2015\Projects\ChamadaApp.ModuloWeb\ChamadaApp.Web\ChamadaApp.Domain\obj\Debug\ChamadaApp.Domain.pdb
 C:\Users\Daniel\Documents\Visual Studio 2015\Projects\ChamadaApp\ChamadaApp.Web\ChamadaApp.Domain\bin\Debug\ChamadaApp.Domain.dll
 C:\Users\Daniel\Documents\Visual Studio 2015\Projects\ChamadaApp\ChamadaApp.Web\ChamadaApp.Domain\bin\Debug\ChamadaApp.Domain.pdb
-C:\Users\Daniel\Documents\Visual Studio 2015\Projects\ChamadaApp\ChamadaApp.Web\ChamadaApp.Domain\obj\Debug\ChamadaApp.Domain.csprojResolveAssemblyReference.cache
 C:\Users\Daniel\Documents\Visual Studio 2015\Projects\ChamadaApp\ChamadaApp.Web\ChamadaApp.Domain\obj\Debug\ChamadaApp.Domain.dll
 C:\Users\Daniel\Documents\Visual Studio 2015\Projects\ChamadaApp\ChamadaApp.Web\ChamadaApp.Domain\obj\Debug\ChamadaApp.Domain.pdb
