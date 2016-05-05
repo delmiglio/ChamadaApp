@@ -13,11 +13,17 @@ namespace ConsoleApplication1
         {
             string time = DateTime.Now.ToShortTimeString();
 
-            DateTime dia = new DateTime();
+            string dia;
 
             Console.WriteLine(time);
 
-            Console.WriteLine(dia.ToString("ddd").ToUpper(), new CultureInfo("pt-br"));
+            
+
+            CultureInfo culture = new CultureInfo("pt-BR");
+            DateTimeFormatInfo dtfi = culture.DateTimeFormat;
+            dia = dtfi.GetDayName(DateTime.Now.DayOfWeek);
+
+            Console.WriteLine(dia.ToUpper().Substring(0, 3));
 
             Console.ReadLine();
         }

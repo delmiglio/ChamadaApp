@@ -28,9 +28,12 @@ namespace ChamadaApp.Api.Utils
         /// <returns>string contendo o dia da semana</returns>
         public static string GetDiaDaSemana()
         {
-            DateTime diaAtual = new DateTime();
+            CultureInfo culture = new CultureInfo("pt-BR");
+            DateTimeFormatInfo dtfi = culture.DateTimeFormat;
 
-            return diaAtual.ToString("ddd", new CultureInfo("pt-br")).ToUpper();
+            string diaAtual = dtfi.GetDayName(DateTime.Now.DayOfWeek);
+
+            return diaAtual.Substring(0, 3).ToUpper();
         }
 
         /// <summary>
