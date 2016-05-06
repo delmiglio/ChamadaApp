@@ -24,6 +24,16 @@ namespace ChamadaApp.Domain.DAO
 
                 return tabela;
             }
+            catch(SqlException sqlErro)
+            {
+                //tratar o erro aqui...
+                return null;
+            }
+            catch (Exception erro)
+            {
+                //tratar o erro aqui...
+                return null;
+            }
             finally
             {
                 conexao.Close();

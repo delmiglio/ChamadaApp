@@ -1,10 +1,6 @@
 ﻿using ChamadaApp.Domain.VO;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChamadaApp.Domain.DAO
 {
@@ -17,7 +13,7 @@ namespace ChamadaApp.Domain.DAO
         /// <param name="currTime">horas e minutos atuais</param>
         /// <param name="professorId">id do professor que leciona a matéria</param>
         /// <returns></returns>
-        public static MateriaForChamadaVO GetMateriaForChamada(string diaSemana, string currTime, int professorId)
+        public static MateriaForChamadaVO GetMateriaForChamada(string diaSemana, string currTime, int professorId, int sitChamadaId)
         {
             
 
@@ -42,7 +38,9 @@ namespace ChamadaApp.Domain.DAO
 
                                             " AND MODULO.ATIVO = 1 AND(HORARIOMATERIAPROFTURMA.ID NOT IN" +
 
-                                            " (SELECT CHAMADA.HORATIOMATERIAPROFTURMAID FROM CHAMADA WHERE CHAMADA.DTCHAMADA <> GETDATE()))", diaSemana, currTime, professorId);
+                                            " (SELECT CHAMADA.HORATIOMATERIAPROFTURMAID FROM CHAMADA WHERE CHAMADA.SITCHAMADA = {3}" +
+
+                                            " AND CHAMADA.DTCHAMADA <> GETDATE()))", diaSemana, currTime, professorId, sitChamadaId);
 
             DataTable data = MetodosDAO.ExecutaSelect(query);
 

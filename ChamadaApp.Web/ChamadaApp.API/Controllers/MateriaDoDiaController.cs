@@ -1,5 +1,6 @@
 ﻿using ChamadaApp.Api.Utils;
 using ChamadaApp.Domain.DAO;
+using ChamadaApp.Domain.ENUM;
 using ChamadaApp.Domain.VO;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace ChamadaApp.Api.Controllers
         [HttpGet]
         public HttpResponseMessage Get(int professorID)
         {
-            MateriaForChamadaVO materia = ChamadaDAO.GetMateriaForChamada(Metodos.GetDiaDaSemana(), Metodos.GetCurrentTime(), professorID);
+            MateriaForChamadaVO materia = ChamadaDAO.GetMateriaForChamada(Metodos.GetDiaDaSemana(), Metodos.GetCurrentTime(), professorID, (int)SitChamadaEnum.Aberta);
 
             return new HttpResponseMessage()
             {

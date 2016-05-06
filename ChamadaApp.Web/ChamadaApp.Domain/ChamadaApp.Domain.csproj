@@ -44,6 +44,8 @@
     <Compile Include="DAO\ConexaoDAO.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DAO\MetodosDAO.cs" />
+    <Compile Include="ENUM\SitAlunoChamadaEnum.cs" />
+    <Compile Include="ENUM\SitChamadaEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VO\AlunoChamadaVO.cs" />
     <Compile Include="VO\AlunoVO.cs" />
