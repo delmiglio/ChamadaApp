@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ChamadaApp.Domain.DAO
 {
-    public class MetodosDAO
+    public static class MetodosDAO
     {
         public static DataTable ExecutaSelect(string sql)
         {

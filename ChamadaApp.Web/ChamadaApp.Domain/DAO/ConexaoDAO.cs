@@ -2,7 +2,7 @@
 
 namespace ChamadaApp.Domain.DAO
 {
-    class ConexaoDAO
+    public static class ConexaoDAO
     {
         /// <summary>
         /// Retorna a conexao com o banco de dados BDTCC
