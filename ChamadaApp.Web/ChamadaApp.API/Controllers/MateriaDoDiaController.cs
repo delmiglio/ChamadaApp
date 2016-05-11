@@ -35,6 +35,12 @@ namespace ChamadaApp.Api.Controllers
                     obj.RetornoMensagem = "Matéria não encontrada!";
                     obj.RetornoDescricao = "Não existem matérias passíveis de chamada para esta data.";
                 }
+                else
+                {
+                    obj.TpRetorno = TpRetornoEnum.Sucesso;
+                    obj.RetornoMensagem = "A seguinte matéria foi encontrada.";
+                    obj.RetornoDescricao = "Efetue a abertura da chamada para a disponibilização aos alunos.";
+                }
             }
             
             return new HttpResponseMessage()

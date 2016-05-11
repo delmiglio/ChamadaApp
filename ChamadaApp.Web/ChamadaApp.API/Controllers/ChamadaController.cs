@@ -1,5 +1,6 @@
 ﻿using ChamadaApp.Api.Utils;
 using ChamadaApp.Domain.DAO;
+using ChamadaApp.Domain.ENUM;
 using ChamadaApp.Domain.VO;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace ChamadaApp.Api.Controllers
             if (materia == null)
             {
                 obj.TpRetorno = TpRetornoEnum.SemRetorno;
-                obj.RetornoMensagem = "Houve falha na operaçãoo!";
+                obj.RetornoMensagem = "Houve falha na operação!";
                 obj.RetornoDescricao = "A chamada não foi aberta. Tente novamente mais tarde!";
             }
             else
@@ -37,10 +38,46 @@ namespace ChamadaApp.Api.Controllers
                 else
                 {
                     obj.TpRetorno = TpRetornoEnum.Erro;
-                    obj.RetornoMensagem = "Houve falha na operaçãoo!";
+                    obj.RetornoMensagem = "Houve falha na operação!";
                     obj.RetornoDescricao = "A chamada não foi aberta. Tente novamente mais tarde!";
                 }
             }            
+
+            return new HttpResponseMessage()
+            {
+                Content = new StringContent(Metodos.ObjectToJson(obj)),
+                StatusCode = HttpStatusCode.OK
+            };
+        }
+
+        [HttpGet]
+        public HttpResponseMessage Get(int alunoID)
+        {
+            Retorno obj = new Retorno();
+
+            if(alunoID == 0)
+            {
+                obj.TpRetorno = TpRetornoEnum.Erro;
+                obj.RetornoMensagem = "Houve falha na operação!";
+                obj.RetornoDescricao = "Tente novamente mais tarde!";
+            }
+            else
+            {
+                obj.ObjRetorno = ChamadaDAO.GetChamadaAbertaByAlunoId(alunoID, (int)SitAlunoChamadaEnum.AguardandoChamada);
+
+                if(obj.ObjRetorno == null)
+                {
+                    obj.TpRetorno = TpRetornoEnum.SemRetorno;
+                    obj.RetornoMensagem = "Nenhuma chamada encontrada!";
+                    obj.RetornoDescricao = "No momento, não existe chamada em aberto a ser respondida.";
+                }
+                else
+                {
+                    obj.TpRetorno = TpRetornoEnum.Sucesso;
+                    obj.RetornoMensagem = "Foi encontrada uma chamada a ser respondida!";
+                    obj.RetornoDescricao = ".";
+                }
+            }
 
             return new HttpResponseMessage()
             {

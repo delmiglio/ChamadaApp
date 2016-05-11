@@ -60,6 +60,12 @@ namespace ChamadaApp.Domain.DAO
             }
         }
 
+        /// <summary>
+        /// Efutua a abertura da chamada para uma matéria e a atual turma.
+        /// </summary>
+        /// <param name="materia">objeto com os parametros da chamada a ser aberta</param>
+        /// <param name="time">horario da chamada</param>
+        /// <returns>true se a chamada for aberta</returns>
         public static bool AbrirChamada(MateriaForChamadaVO materia, string time)
         {
             bool retorno;
@@ -78,7 +84,7 @@ namespace ChamadaApp.Domain.DAO
 
                                            " OUTPUT INSERTED.ID" +
 
-                                           " VALUES(GETDATE(), \'{0}\', \'{1}\', {2}, {3})", time, time, materia.HorarioMaterioProfTurmaId, (int)SitChamadaEnum.Aberta);
+                                           " VALUES(GETDATE(), \'{0}\', null, {1}, {2})", time, materia.HorarioMaterioProfTurmaId, (int)SitChamadaEnum.Aberta);
 
                 insertChamada.Transaction = transacao;
 
@@ -160,6 +166,28 @@ namespace ChamadaApp.Domain.DAO
             }
 
             return alunos;
+        }
+
+        /// <summary>
+        /// Retorna a chamada para o aluno
+        /// </summary>
+        /// <param name="alunoId">identificação do aluno</param>
+        /// <param name="sitAlunoChamadaId">situação da chamada</param>
+        /// <returns>retorna o registro da chamada</returns>
+        public static AlunoChamadaVO GetChamadaAbertaByAlunoId(int alunoId, int sitAlunoChamadaId)
+        {
+            string query = string.Format("SELECT * FROM ALUNOCHAMADA" +
+
+                               " WHERE ALUNOCHAMADA.ALUNOID = {0}" +
+
+                               " AND ALUNOCHAMADA.SITALUNOCHAMADA = {1}", alunoId, sitAlunoChamadaId);
+
+            DataTable data = MetodosDAO.ExecutaSelect(query);
+
+            if (data.Rows.Count > 0)
+                return new AlunoChamadaVO(data.Rows[0]);
+            else
+                return null;
         }
     }
 }
