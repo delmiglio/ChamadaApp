@@ -52,7 +52,6 @@
     <Compile Include="VO\MateriaForChamadaVO.cs" />
     <Compile Include="VO\ModuloVO.cs" />
     <Compile Include="VO\ProfessorVO.cs" />
-    <Compile Include="VO\Retorno.cs" />
     <Compile Include="VO\TpGenericoVO.cs" />
     <Compile Include="VO\UsuarioVO.cs" />
   </ItemGroup>

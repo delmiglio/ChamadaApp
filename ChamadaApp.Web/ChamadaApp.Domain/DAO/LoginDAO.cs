@@ -12,9 +12,9 @@ namespace ChamadaApp.Domain.DAO
         /// <param name="login">login do usuario</param>
         /// <param name="senha">senha do usuario</param>
         /// <returns>retorna o usuario correspondente caso encontrado</returns>
-        public static Retorno GetUserByLogin(string login, string senha)
+        public static UsuarioVO GetUserByLogin(string login, string senha)
         {
-            Retorno obj = new Retorno();
+            UsuarioVO user = new UsuarioVO();
 
             try
             {
@@ -23,26 +23,16 @@ namespace ChamadaApp.Domain.DAO
 
                 DataTable data = MetodosDAO.ExecutaSelect(getLogin);
 
-                if (data.Rows.Count > 0)   
-                    obj.ObjRetorno = new UsuarioVO(data.Rows[0]);
+                if (data.Rows.Count > 0)
+                    user = new UsuarioVO(data.Rows[0]);
                 else
-                {
-                    //Se não encontrar o usuário retorna o seguinte erro.
-                    obj.IsErro = true;
-                    obj.ErroMensagem = "Login Inválido!";
-                    obj.ErroDescricao = "Verifique se as credenciais estão corretas!";
-                }
+                    user = null;              
 
-                return obj;
+                return user;
             }
             catch(Exception erro)
             {
-                //caso aconteça alguma exceção é retornado seus detelhes...
-                obj.IsErro = true;
-                obj.ErroMensagem = "Ocorreu um erro na operação.";
-                obj.ErroMensagem = erro.Message;
-
-                return obj;
+                throw new Exception(erro.Message);
             }   
         }   
     }

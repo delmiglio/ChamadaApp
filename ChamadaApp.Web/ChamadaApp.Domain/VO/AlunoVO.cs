@@ -1,4 +1,6 @@
-﻿namespace ChamadaApp.Domain.VO
+﻿using System.Data;
+
+namespace ChamadaApp.Domain.VO
 {
     class AlunoVO : UsuarioVO
     {
@@ -7,7 +9,12 @@
 
         }
 
-        public int Id { get; set; }
+        public AlunoVO(DataRow registro)
+        {
+            this.Id = (int)registro["ID"];
+            this.SitAlunoId = (int)registro["SITALUNOID"];
+        }              
+
         public int SitAlunoId { get; set; }
 
     }
