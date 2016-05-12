@@ -189,5 +189,24 @@ namespace ChamadaApp.Domain.DAO
             else
                 return null;
         }
+
+        public static ChamadaVO GetChamadaAbertaByProfessorId(int professorId, int sitChamadaId)
+        {
+            string query = string.Format("SELECT CHAMADA.* FROM CHAMADA" +
+
+                                        " INNER JOIN HORARIOMATERIAPROFTURMA ON HORARIOMATERIAPROFTURMA.ID = CHAMADA.HORARIOMATERIAPROFTURMAID" +
+                                        " INNER JOIN MATERIAPROFTURMA ON MATERIAPROFTURMA.ID = HORARIOMATERIAPROFTURMA.MATERIAPROFTURMAID" +
+
+                                        " WHERE MATERIAPROFTURMA.PROFESSORID = {0} AND CHAMADA.SITCHAMADA = {1} AND MATERIAPROFTURMA.ATIVO = 1" +
+                                        
+                                        " AND HORARIOMATERIAPROFTURMA.ATIVO = 1", professorId, sitChamadaId);
+
+            DataTable data = MetodosDAO.ExecutaSelect(query);
+
+            if (data.Rows.Count > 0)
+                return new ChamadaVO(data.Rows[0]);
+            else
+                return null;
+        }
     }
 }

@@ -51,7 +51,43 @@ namespace ChamadaApp.Api.Controllers
         }
 
         [HttpGet]
-        public HttpResponseMessage Get(int alunoID)
+        public HttpResponseMessage GetChamadaProfessor(int professorId)
+        {
+            Retorno obj = new Retorno();
+
+            if (professorId == 0)
+            {
+                obj.TpRetorno = TpRetornoEnum.Erro;
+                obj.RetornoMensagem = "Houve falha na operação!";
+                obj.RetornoDescricao = "Tente novamente mais tarde!";
+            }
+            else
+            {
+                obj.ObjRetorno = ChamadaDAO.GetChamadaAbertaByProfessorId(professorId, (int)SitChamadaEnum.Aberta);
+
+                if (obj.ObjRetorno == null)
+                {
+                    obj.TpRetorno = TpRetornoEnum.SemRetorno;
+                    obj.RetornoMensagem = "Nenhuma chamada encontrada!";
+                    obj.RetornoDescricao = "No momento, não existe chamada em aberto.";
+                }
+                else
+                {
+                    obj.TpRetorno = TpRetornoEnum.Sucesso;
+                    obj.RetornoMensagem = "Foi encontrada uma chamada em andamento!";
+                    obj.RetornoDescricao = ".";
+                }
+            }
+
+            return new HttpResponseMessage()
+            {
+                Content = new StringContent(Metodos.ObjectToJson(obj)),
+                StatusCode = HttpStatusCode.OK
+            };
+        }
+        
+        [HttpGet]        
+        public HttpResponseMessage GetChamadaAluno(int alunoID)
         {
             Retorno obj = new Retorno();
 
