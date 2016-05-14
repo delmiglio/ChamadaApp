@@ -10,7 +10,7 @@ namespace ChamadaApp.Api.Controllers
     public class LoginController : ApiController
     {
         [HttpGet]        
-        public HttpResponseMessage Get(string login, string senha)
+        public HttpResponseMessage GetUsuarioByLogin(string login, string senha)
         {
             Retorno obj = new Retorno();
 
@@ -32,6 +32,18 @@ namespace ChamadaApp.Api.Controllers
                     obj.RetornoDescricao = "Verifique se as credenciais estão corretas!";
                 }                
             }
+
+            return new HttpResponseMessage()
+            {
+                Content = new StringContent(Metodos.ObjectToJson(obj)),
+                StatusCode = HttpStatusCode.OK
+            };
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetValidaAcesso()
+        {
+            Retorno obj = new Retorno();            
 
             return new HttpResponseMessage()
             {
