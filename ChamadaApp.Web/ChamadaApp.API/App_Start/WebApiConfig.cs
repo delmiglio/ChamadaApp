@@ -14,7 +14,7 @@ namespace ChamadaApp.Api
             // Web API configuration and services
 
             //CORS
-            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
+            config.EnableCors();
 
             // Web API routes
             config.MapHttpAttributeRoutes();

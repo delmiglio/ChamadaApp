@@ -6,17 +6,34 @@ namespace ChamadaApp.Domain.DAO
 {
     public class LoginDAO
     {
-        public static UsuarioVO GetUsuarioRA(string login, string senha)
+        /// <summary>
+        /// Retorna um objeto da instancia Retorno preenchido
+        /// </summary>
+        /// <param name="login">login do usuario</param>
+        /// <param name="senha">senha do usuario</param>
+        /// <returns>retorna o usuario correspondente caso encontrado</returns>
+        public static UsuarioVO GetUserByLogin(string login, string senha)
         {
-            string getLogin = String.Format("SELECT * FROM USUARIO WHERE USUARIO.LOGIN = {0} AND " +
-                                            "USUARIO.SENHA = {1}", login, senha);
+            UsuarioVO user = new UsuarioVO();
 
-            DataTable data = MetodosDAO.ExecutaSelect(getLogin);
+            try
+            {
+                string getLogin = String.Format("SELECT * FROM USUARIO WHERE USUARIO.LOGIN = {0} AND " +
+                                                "USUARIO.SENHA = {1} AND USUARIO.ATIVO = 1", login, senha);
 
-            if (data.Rows.Count > 0)
-                return new UsuarioVO(data.Rows[0]);
-            else
-                return null;  
+                DataTable data = MetodosDAO.ExecutaSelect(getLogin);
+
+                if (data.Rows.Count > 0)
+                    user = new UsuarioVO(data.Rows[0]);
+                else
+                    user = null;              
+
+                return user;
+            }
+            catch(Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }   
         }   
     }
 }
