@@ -18,6 +18,8 @@ namespace ChamadaApp.Api.Utils
 
         public object ObjRetorno { get; set; }
 
+        public string ObjTypeName { get; set; }
+
         public List<object> ListRetorno { get; set; }
     }
 }
