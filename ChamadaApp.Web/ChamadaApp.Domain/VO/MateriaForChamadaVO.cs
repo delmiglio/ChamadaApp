@@ -17,12 +17,15 @@ namespace ChamadaApp.Domain.VO
         public MateriaForChamadaVO(DataRow registro)
         {
             this.HorarioMaterioProfTurmaId = (int)registro["HMPTID"];
+            this.TurmaId = (int)registro["TURMAID"];
             this.MateriaDescricao = registro["MATERIA"].ToString();
             this.ModuloDescricao = registro["MODULO"].ToString();
             this.CursoDescricao = registro["CURSO"].ToString();
         }
 
         public int HorarioMaterioProfTurmaId { get; set; }
+
+        public int TurmaId { get; set; }
 
         public string MateriaDescricao { get; set; }
 

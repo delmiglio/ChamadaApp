@@ -1,13 +1,22 @@
-﻿namespace ChamadaApp.Domain.VO
+﻿using System.Data;
+
+namespace ChamadaApp.Domain.VO
 {
-    class AlunoVO : UsuarioVO
+    public class AlunoVO : UsuarioVO
     {
         public AlunoVO()
         {
 
         }
 
-        public int Id { get; set; }
+        public AlunoVO(DataRow registro)
+        {
+            this.Id = (int)registro["ID"];
+            this.Nome = registro["NOME"].ToString();
+            this.Sobrenome = registro["SOBRENOME"].ToString();
+            this.SitAlunoId = (int)registro["SITALUNOID"];
+        }              
+
         public int SitAlunoId { get; set; }
 
     }

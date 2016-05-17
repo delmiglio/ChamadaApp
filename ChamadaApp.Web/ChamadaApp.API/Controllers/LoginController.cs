@@ -1,6 +1,5 @@
 ﻿using ChamadaApp.Api.Utils;
 using ChamadaApp.Domain.DAO;
-using ChamadaApp.Domain.VO;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -11,21 +10,40 @@ namespace ChamadaApp.Api.Controllers
     public class LoginController : ApiController
     {
         [HttpGet]        
-        public HttpResponseMessage Get(string login, string senha)
+        public HttpResponseMessage GetUsuarioByLogin(string login, string senha)
         {
-            Retorno obj;
+            Retorno obj = new Retorno();
 
             //Verifica se os parametros foram informados.
-            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(senha))
-            {
-                obj = new Retorno();
-
-                obj.IsErro = true;
-                obj.ErroMensagem = "Login Inválido!";
-                obj.ErroDescricao = "Para efetuar o login, deverá ser informado os campos Login e Senha.";
+            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(senha))
+            {             
+                obj.TpRetorno = TpRetornoEnum.Erro;
+                obj.RetornoMensagem = "Login Inválido!";
+                obj.RetornoDescricao = "Para efetuar o login, deverá ser informado os campos Login e Senha.";
             }
-            else         
-                obj = LoginDAO.GetUserByLogin(login, senha);
+            else
+            {
+                obj.ObjRetorno = LoginDAO.GetUserByLogin(login, senha);
+
+                if(obj.ObjRetorno == null)
+                {                    
+                    obj.TpRetorno = TpRetornoEnum.SemRetorno;
+                    obj.RetornoMensagem = "Login Inválido!";
+                    obj.RetornoDescricao = "Verifique se as credenciais estão corretas!";
+                }                
+            }
+
+            return new HttpResponseMessage()
+            {
+                Content = new StringContent(Metodos.ObjectToJson(obj)),
+                StatusCode = HttpStatusCode.OK
+            };
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetValidaAcesso()
+        {
+            Retorno obj = new Retorno();            
 
             return new HttpResponseMessage()
             {
