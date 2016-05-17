@@ -120,6 +120,42 @@ namespace ChamadaApp.Domain.DAO
             return retorno;
         }
 
+        private static ChamadaVO GetChamadaForUpdate(int chamadaId)
+        {
+            string query = string.Format("SELECT * FROM CHAMADA WHERE CHAMADA.ID = {0}", chamadaId);
+
+            DataTable data = MetodosDAO.ExecutaSelect(query);
+
+            if (data.Rows.Count > 0)
+                return new ChamadaVO(data.Rows[0]);
+            else
+                return null;
+        }
+
+        private static List<AlunoChamadaVO> GetALunosChamada(int chamadaId, int sitAlunoChamadaId)
+        {
+            List<AlunoChamadaVO> alunos = new List<AlunoChamadaVO>();
+
+            string query = string.Format("select ALUNOCHAMADA.ID, ALUNOCHAMADA.CHAMADAID, SITALUNOCHAMADA.DESCRICAO, ALUNOCHAMADA.DTPRESENCA, USUARIO.NOME," + 
+                
+                                         " USUARIO.SOBRENOME from ALUNOCHAMADA" +
+
+                                         " INNER JOIN CHAMADA ON CHAMADA.ID = ALUNOCHAMADA.CHAMADAID" +
+                                         " INNER JOIN USUARIO ON USUARIO.ID = ALUNOCHAMADA.ALUNOID" +
+                                         " INNER JOIN SITALUNOCHAMADA ON SITALUNOCHAMADA.ID = ALUNOCHAMADA.SITALUNOCHAMADA" +
+
+                                         " WHERE CHAMADA.ID = {0} AND ALUNOCHAMADA.SITALUNOCHAMADA = {1}", chamadaId, sitAlunoChamadaId);
+
+            DataTable data = MetodosDAO.ExecutaSelect(query);
+
+            foreach (DataRow registro in data.Rows)
+            {
+                alunos.Add(new AlunoChamadaVO(registro));
+            }
+
+            return alunos;
+        }
+
         /// <summary>
         /// Prepara o aluno para ser criado seu registro na chamada
         /// </summary>

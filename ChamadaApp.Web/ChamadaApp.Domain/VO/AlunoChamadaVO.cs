@@ -18,18 +18,19 @@ namespace ChamadaApp.Domain.VO
         {
             this.Id = (int)registro["ID"];
             this.ChamadaId = (int)registro["CHAMADAID"];
-            this.AlunoId = (int)registro["ALUNOID"];
-            this.SitAlunoChamadaId = (int)registro["SITALUNOCHAMADA"];
+            this.Aluno = new AlunoVO(registro);
+            this.SitAlunoChamada = new TpGenericoVO(registro);
+            this.DtPresenca = registro["DTPRESENCA"].ToString();
         }
 
         public int Id { get; set; }
 
         public int ChamadaId { get; set; }
 
-        public int AlunoId { get; set; }
+        public AlunoVO Aluno { get; set; }
 
-        public int SitAlunoChamadaId { get; set; }
+        public TpGenericoVO SitAlunoChamada { get; set; }
 
-        public DateTime DtPresenca { get; set; }
+        public string DtPresenca { get; set; }
     }
 }
