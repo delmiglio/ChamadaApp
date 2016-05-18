@@ -49,6 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VO\AlunoChamadaVO.cs" />
     <Compile Include="VO\AlunoVO.cs" />
+    <Compile Include="VO\ChamadaForPresencaVO.cs" />
     <Compile Include="VO\ChamadaVO.cs" />
     <Compile Include="VO\MateriaForChamadaVO.cs" />
     <Compile Include="VO\ModuloVO.cs" />

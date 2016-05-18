@@ -210,18 +210,24 @@ namespace ChamadaApp.Domain.DAO
         /// <param name="alunoId">identificação do aluno</param>
         /// <param name="sitAlunoChamadaId">situação da chamada</param>
         /// <returns>retorna o registro da chamada</returns>
-        public static AlunoChamadaVO GetChamadaAbertaByAlunoId(int alunoId, int sitAlunoChamadaId)
+        public static ChamadaForPresencaVO GetChamadaAbertaByAlunoId(int alunoId, int sitAlunoChamadaId)
         {
-            string query = string.Format("SELECT * FROM ALUNOCHAMADA" +
+            string query = string.Format("SELECT ALUNOCHAMADA.ID, ALUNOCHAMADA.ALUNOID, SITALUNOCHAMADA.DESCRICAO AS 'SITUACAO'," +
+                
+                                        " MATERIA.DESCRICAO AS 'MATERIA', USUARIO.NOME, USUARIO.SOBRENOME FROM ALUNOCHAMADA" +
 
-                               " WHERE ALUNOCHAMADA.ALUNOID = {0}" +
-
-                               " AND ALUNOCHAMADA.SITALUNOCHAMADA = {1}", alunoId, sitAlunoChamadaId);
+                                        " INNER JOIN SITALUNOCHAMADA ON SITALUNOCHAMADA.ID = ALUNOCHAMADA.SITALUNOCHAMADA" +
+                                        " INNER JOIN CHAMADA ON CHAMADA.ID = ALUNOCHAMADA.CHAMADAID" +
+                                        " INNER JOIN HORARIOMATERIAPROFTURMA ON HORARIOMATERIAPROFTURMA.ID = CHAMADA.HORARIOMATERIAPROFTURMAID" +
+                                        " INNER JOIN MATERIAPROFTURMA ON MATERIAPROFTURMA.ID = HORARIOMATERIAPROFTURMA.MATERIAPROFTURMAID" +
+                                        " INNER JOIN MATERIACURSO ON MATERIACURSO.ID = MATERIAPROFTURMA.MATERIACURSOID" +
+                                        " INNER JOIN MATERIA ON MATERIA.ID = MATERIACURSO.MATERIAID" +
+                                        " INNER JOIN USUARIO ON USUARIO.ID = MATERIAPROFTURMA.PROFESSORID", alunoId, sitAlunoChamadaId);
 
             DataTable data = MetodosDAO.ExecutaSelect(query);
 
             if (data.Rows.Count > 0)
-                return new AlunoChamadaVO(data.Rows[0]);
+                return new ChamadaForPresencaVO(data.Rows[0]);
             else
                 return null;
         }

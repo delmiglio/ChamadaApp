@@ -38,6 +38,7 @@ namespace ChamadaApp.Api.Controllers
                 else
                 {
                     obj.TpRetorno = TpRetornoEnum.Sucesso;
+                    obj.ObjTypeName = obj.ObjRetorno.GetType().Name;
                     obj.RetornoMensagem = "A seguinte matéria foi encontrada.";
                     obj.RetornoDescricao = "Efetue a abertura da chamada para a disponibilização aos alunos.";
                 }
@@ -88,7 +89,7 @@ namespace ChamadaApp.Api.Controllers
         }
 
         [HttpGet]
-        public HttpResponseMessage GetChamadaProfessor(int professorId)
+        public HttpResponseMessage GetChamadaProfessor(int professorId, int sitChamadaId)
         {
             Retorno obj = new Retorno();
 
@@ -100,7 +101,7 @@ namespace ChamadaApp.Api.Controllers
             }
             else
             {
-                obj.ObjRetorno = ChamadaDAO.GetChamadaAbertaByProfessorId(professorId, (int)SitChamadaEnum.Aberta);
+                obj.ObjRetorno = ChamadaDAO.GetChamadaAbertaByProfessorId(professorId, sitChamadaId);
 
                 if (obj.ObjRetorno == null)
                 {
@@ -111,6 +112,7 @@ namespace ChamadaApp.Api.Controllers
                 else
                 {
                     obj.TpRetorno = TpRetornoEnum.Sucesso;
+                    obj.ObjTypeName = obj.ObjRetorno.GetType().Name;
                     obj.RetornoMensagem = "Foi encontrada uma chamada em andamento!";
                     obj.RetornoDescricao = ".";
                 }
@@ -147,6 +149,7 @@ namespace ChamadaApp.Api.Controllers
                 else
                 {
                     obj.TpRetorno = TpRetornoEnum.Sucesso;
+                    obj.ObjTypeName = obj.ObjRetorno.GetType().Name;
                     obj.RetornoMensagem = "Foi encontrada uma chamada a ser respondida!";
                     obj.RetornoDescricao = ".";
                 }
