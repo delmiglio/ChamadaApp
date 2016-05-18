@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChamadaApp.Domain", "ChamadaApp.Domain\ChamadaApp.Domain.csproj", "{B731DEB4-BFFA-4AE4-937C-88F040C019C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChamadaApp.Api", "ChamadaApp.Api\ChamadaApp.Api.csproj", "{9C558AC7-5A81-4E93-B7C9-94239B53D464}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChamadaApp.Web", "ChamadaApp.Web\ChamadaApp.Web.csproj", "{12EA8E3E-5A53-440C-BF1A-0BFF3121D7FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9C558AC7-5A81-4E93-B7C9-94239B53D464}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C558AC7-5A81-4E93-B7C9-94239B53D464}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C558AC7-5A81-4E93-B7C9-94239B53D464}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12EA8E3E-5A53-440C-BF1A-0BFF3121D7FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12EA8E3E-5A53-440C-BF1A-0BFF3121D7FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12EA8E3E-5A53-440C-BF1A-0BFF3121D7FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12EA8E3E-5A53-440C-BF1A-0BFF3121D7FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
