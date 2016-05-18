@@ -1,5 +1,6 @@
 ﻿using ChamadaApp.Api.Utils;
 using ChamadaApp.Domain.DAO;
+using ChamadaApp.Domain.VO;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -23,13 +24,19 @@ namespace ChamadaApp.Api.Controllers
             }
             else
             {
-                obj.ObjRetorno = LoginDAO.GetUserByLogin(login, senha);
 
-                if(obj.ObjRetorno == null)
+                UsuarioVO user = LoginDAO.GetUserByLogin(login, senha);
+
+                if(user == null)
                 {                    
                     obj.TpRetorno = TpRetornoEnum.SemRetorno;
                     obj.RetornoMensagem = "Login Inválido!";
                     obj.RetornoDescricao = "Verifique se as credenciais estão corretas!";
+                }
+                else
+                {
+                    obj.ObjRetorno = user;
+                    obj.ObjTypeName = user.GetType().Name;
                 }                
             }
 
