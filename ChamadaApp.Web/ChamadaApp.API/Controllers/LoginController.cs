@@ -35,6 +35,7 @@ namespace ChamadaApp.Api.Controllers
                 }
                 else
                 {
+                    obj.TpRetorno = TpRetornoEnum.Sucesso;
                     obj.ObjRetorno = user;
                     obj.ObjTypeName = user.GetType().Name;
                 }                
