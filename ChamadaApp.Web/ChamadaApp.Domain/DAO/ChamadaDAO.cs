@@ -222,7 +222,9 @@ namespace ChamadaApp.Domain.DAO
                                         " INNER JOIN MATERIAPROFTURMA ON MATERIAPROFTURMA.ID = HORARIOMATERIAPROFTURMA.MATERIAPROFTURMAID" +
                                         " INNER JOIN MATERIACURSO ON MATERIACURSO.ID = MATERIAPROFTURMA.MATERIACURSOID" +
                                         " INNER JOIN MATERIA ON MATERIA.ID = MATERIACURSO.MATERIAID" +
-                                        " INNER JOIN USUARIO ON USUARIO.ID = MATERIAPROFTURMA.PROFESSORID", alunoId, sitAlunoChamadaId);
+                                        " INNER JOIN USUARIO ON USUARIO.ID = MATERIAPROFTURMA.PROFESSORID" +
+
+                                        " WHERE ALUNOCHAMADA.ALUNOID = {0} AND ALUNOCHAMADA.SITALUNOCHAMADA = {1}", alunoId, sitAlunoChamadaId);
 
             DataTable data = MetodosDAO.ExecutaSelect(query);
 
