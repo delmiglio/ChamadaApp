@@ -70,7 +70,7 @@ namespace ChamadaApp.Domain.DAO
         {
             bool retorno;
 
-            SqlConnection con = ConexaoDAO.GetConexao();            
+            SqlConnection con = ConexaoDAO.GetConexao();
 
             SqlTransaction transacao = con.BeginTransaction();
 
@@ -96,7 +96,7 @@ namespace ChamadaApp.Domain.DAO
                     SqlCommand cmd;
 
                     foreach (AlunoVO aluno in alunos)
-                    {                        
+                    {
                         cmd = PreparaAlunoChamada(chamadaId, aluno.Id, con);
                         cmd.Transaction = transacao;
                         cmd.ExecuteNonQuery();
@@ -110,7 +110,7 @@ namespace ChamadaApp.Domain.DAO
             catch (SqlException erro)
             {
                 transacao.Rollback();
-                retorno = false;                
+                retorno = false;
             }
             finally
             {
@@ -149,22 +149,19 @@ namespace ChamadaApp.Domain.DAO
 
                 updateChamada.CommandText = string.Format("UPDATE CHAMADA SET CHAMADA.SITCHAMADA = {0}" +
 
-                                                          " WHERE CHAMADA.ID = {1}", (int)SitChamadaEnum.Encerrada, chamadaId);
+                                                          " WHERE CHAMADA.ID = {1}", (int)SitChamadaEnum.Concluida, chamadaId);
 
                 updateChamada.Transaction = transacao;
 
                 updateChamada.ExecuteNonQuery();
 
-                if (chamadaId > 0)
-                {
-                    SqlCommand cmd;
+                SqlCommand cmd;
 
-                    foreach (AlunoChamadaVO alunoChamada in alunosNaoPresentes)
-                    {
-                        cmd = ManterAlunoChamada(alunoChamada.Id, (int)SitAlunoChamadaEnum.NaoPresente, con);
-                        cmd.Transaction = transacao;
-                        cmd.ExecuteNonQuery();
-                    }
+                foreach (AlunoChamadaVO alunoChamada in alunosNaoPresentes)
+                {
+                    cmd = ManterAlunoChamada(alunoChamada.Id, (int)SitAlunoChamadaEnum.NaoPresente, con);
+                    cmd.Transaction = transacao;
+                    cmd.ExecuteNonQuery();
                 }
 
                 transacao.Commit();
@@ -211,8 +208,8 @@ namespace ChamadaApp.Domain.DAO
         {
             List<AlunoChamadaVO> alunos = new List<AlunoChamadaVO>();
 
-            string query = string.Format("select ALUNOCHAMADA.ID, ALUNOCHAMADA.CHAMADAID, SITALUNOCHAMADA.DESCRICAO, ALUNOCHAMADA.DTPRESENCA, USUARIO.NOME," + 
-                
+            string query = string.Format("select ALUNOCHAMADA.ID, ALUNOCHAMADA.CHAMADAID, SITALUNOCHAMADA.DESCRICAO, ALUNOCHAMADA.DTPRESENCA, USUARIO.NOME," +
+
                                          " USUARIO.SOBRENOME from ALUNOCHAMADA" +
 
                                          " INNER JOIN CHAMADA ON CHAMADA.ID = ALUNOCHAMADA.CHAMADAID" +
@@ -254,7 +251,7 @@ namespace ChamadaApp.Domain.DAO
 
             cmd.CommandText = string.Format("UPDATE ALUNOCHAMADA SET ALUNOCHAMADA.SITALUNOCHAMADA = {0}" +
 
-                                            " WHERE ALUNOCHAMADA.ID = {1}", alunoChamadaId, sitAlunoChamada);
+                                            " WHERE ALUNOCHAMADA.ID = {1}", sitAlunoChamada, alunoChamadaId);
             return cmd;
         }
 
@@ -298,7 +295,7 @@ namespace ChamadaApp.Domain.DAO
         public static ChamadaForPresencaVO GetChamadaAbertaByAlunoId(int alunoId, int sitAlunoChamadaId)
         {
             string query = string.Format("SELECT ALUNOCHAMADA.ID, ALUNOCHAMADA.ALUNOID, SITALUNOCHAMADA.DESCRICAO AS 'SITUACAO'," +
-                
+
                                         " MATERIA.DESCRICAO AS 'MATERIA', USUARIO.NOME, USUARIO.SOBRENOME FROM ALUNOCHAMADA" +
 
                                         " INNER JOIN SITALUNOCHAMADA ON SITALUNOCHAMADA.ID = ALUNOCHAMADA.SITALUNOCHAMADA" +
@@ -327,7 +324,7 @@ namespace ChamadaApp.Domain.DAO
                                         " INNER JOIN MATERIAPROFTURMA ON MATERIAPROFTURMA.ID = HORARIOMATERIAPROFTURMA.MATERIAPROFTURMAID" +
 
                                         " WHERE MATERIAPROFTURMA.PROFESSORID = {0} AND CHAMADA.SITCHAMADA = {1} AND MATERIAPROFTURMA.ATIVO = 1" +
-                                        
+
                                         " AND HORARIOMATERIAPROFTURMA.ATIVO = 1", professorId, sitChamadaId);
 
             DataTable data = MetodosDAO.ExecutaSelect(query);

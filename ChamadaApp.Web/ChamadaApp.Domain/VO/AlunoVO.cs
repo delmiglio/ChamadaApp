@@ -12,8 +12,7 @@ namespace ChamadaApp.Domain.VO
         public AlunoVO(DataRow registro)
         {
             this.Id = (int)registro["ID"];
-            this.Nome = registro["NOME"].ToString();
-            this.Sobrenome = registro["SOBRENOME"].ToString();
+            
             this.SitAlunoId = (int)registro["SITALUNOID"];
         }              
 
