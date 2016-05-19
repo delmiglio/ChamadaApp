@@ -174,7 +174,7 @@ namespace ChamadaApp.Api.Controllers
                 {
                     obj.TpRetorno = TpRetornoEnum.Sucesso;
                     obj.RetornoMensagem = "Sucesso";
-                    obj.RetornoDescricao = "Presença COnfirmada!";
+                    obj.RetornoDescricao = "Presença Confirmada!";
                 }
                 else
                 {
@@ -222,7 +222,7 @@ namespace ChamadaApp.Api.Controllers
             else
             {               
                 obj.ListRetorno = ChamadaDAO.EncerrarChamada(chamadaId, Metodos.GetCurrentTime()).Cast<object>().ToList();
-                obj.ObjTypeName = obj.ListRetorno.GetType().Name;
+                obj.ObjTypeName = typeof(AlunoChamadaVO).Name;
                 obj.TpRetorno = TpRetornoEnum.Sucesso;
                 obj.RetornoMensagem = "Sucesso.";
                 obj.RetornoDescricao = "A chamada foi encerrada.";
