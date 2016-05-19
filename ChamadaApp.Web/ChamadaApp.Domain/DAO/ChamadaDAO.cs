@@ -120,6 +120,81 @@ namespace ChamadaApp.Domain.DAO
             return retorno;
         }
 
+        public static List<AlunoChamadaVO> EncerrarChamada(int chamadaId, string time)
+        {
+            List<AlunoChamadaVO> alunosNaoPresentes = GetALunosChamada(chamadaId, (int)SitAlunoChamadaEnum.AguardandoChamada);
+
+            string query = string.Format("UPDATE CHAMADA SET CHAMADA.HORATERMINO = \'{0}\', CHAMADA.SITCHAMADA = {1}" +
+
+                                         " WHERE CHAMADA.ID = {2}", time, (int)SitChamadaEnum.Encerrada, chamadaId);
+
+            MetodosDAO.ExecutaSQL(query);
+
+            return alunosNaoPresentes;
+        }
+
+        public static bool ConcluirChamada(int chamadaId)
+        {
+            bool retorno;
+
+            SqlConnection con = ConexaoDAO.GetConexao();
+
+            SqlTransaction transacao = con.BeginTransaction();
+
+            try
+            {
+                List<AlunoChamadaVO> alunosNaoPresentes = GetALunosChamada(chamadaId, (int)SitAlunoChamadaEnum.AguardandoChamada);
+
+                SqlCommand updateChamada = con.CreateCommand();
+
+                updateChamada.CommandText = string.Format("UPDATE CHAMADA SET CHAMADA.SITCHAMADA = {0}" +
+
+                                                          " WHERE CHAMADA.ID = {1}", (int)SitChamadaEnum.Encerrada, chamadaId);
+
+                updateChamada.Transaction = transacao;
+
+                updateChamada.ExecuteNonQuery();
+
+                if (chamadaId > 0)
+                {
+                    SqlCommand cmd;
+
+                    foreach (AlunoChamadaVO alunoChamada in alunosNaoPresentes)
+                    {
+                        cmd = ManterAlunoChamada(alunoChamada.Id, (int)SitAlunoChamadaEnum.NaoPresente, con);
+                        cmd.Transaction = transacao;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                transacao.Commit();
+
+                retorno = true;
+            }
+            catch (SqlException erro)
+            {
+                transacao.Rollback();
+                retorno = false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return retorno;
+        }
+
+        public static bool MarcarPresenca(int alunoChamadaId, string time)
+        {
+            string query = string.Format("UPDATE ALUNOCHAMADA SET ALUNOCHAMADA.SITALUNOCHAMADA = {0}, ALUNOCHAMADA.DTPRESENCA = \'{1}\'" +
+
+                                         " WHERE ALUNOCHAMADA.ID = {2}", (int)SitAlunoChamadaEnum.PresencaConfirmada, time, alunoChamadaId);
+
+            MetodosDAO.ExecutaSQL(query);
+
+            return true;
+        }
+
         private static ChamadaVO GetChamadaForUpdate(int chamadaId)
         {
             string query = string.Format("SELECT * FROM CHAMADA WHERE CHAMADA.ID = {0}", chamadaId);
@@ -170,6 +245,16 @@ namespace ChamadaApp.Domain.DAO
             cmd.CommandText = string.Format("INSERT INTO ALUNOCHAMADA (CHAMADAID, ALUNOID, SITALUNOCHAMADA, DTPRESENCA)" +
 
                             " VALUES({0}, {1}, {2}, null)", chamadaId, alunoId, (int)SitAlunoChamadaEnum.AguardandoChamada);
+            return cmd;
+        }
+
+        private static SqlCommand ManterAlunoChamada(int alunoChamadaId, int sitAlunoChamada, SqlConnection con)
+        {
+            SqlCommand cmd = con.CreateCommand();
+
+            cmd.CommandText = string.Format("UPDATE ALUNOCHAMADA SET ALUNOCHAMADA.SITALUNOCHAMADA = {0}" +
+
+                                            " WHERE ALUNOCHAMADA.ID = {1}", alunoChamadaId, sitAlunoChamada);
             return cmd;
         }
 

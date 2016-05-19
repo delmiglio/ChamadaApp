@@ -9,6 +9,7 @@ namespace ChamadaApp.Domain.ENUM
     public enum SitChamadaEnum
     {
         Aberta = 1,
-        Concluida = 2
+        Encerrada = 2,
+        Concluida = 3
     }
 }

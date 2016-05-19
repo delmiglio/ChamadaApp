@@ -175,9 +175,18 @@ namespace ChamadaApp.Api.Controllers
         }
 
         [HttpPut]
-        public HttpResponseMessage PutConcluirChamada(int chamadaId)
+        public HttpResponseMessage PutManterChamada(int chamadaId, int sitChamadaId)
         {
             Retorno obj = new Retorno();
+
+            if(sitChamadaId == (int)SitChamadaEnum.Concluida)
+            {
+                obj.ListRetorno = null;
+            }
+            else
+            {
+
+            }
 
             return new HttpResponseMessage()
             {
