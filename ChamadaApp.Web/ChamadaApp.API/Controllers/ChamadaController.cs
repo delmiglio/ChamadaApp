@@ -48,7 +48,6 @@ namespace ChamadaApp.Api.Controllers
             {
                 Content = new StringContent(Metodos.ObjectToJson(obj)),
                 StatusCode = HttpStatusCode.OK
-
             };
         }
 
@@ -167,6 +166,30 @@ namespace ChamadaApp.Api.Controllers
         {
             Retorno obj = new Retorno();
 
+            if(alunoChamadaId > 0)
+            {
+                bool resposta = ChamadaDAO.MarcarPresenca(alunoChamadaId, Metodos.GetCurrentTime());
+
+                if(resposta)
+                {
+                    obj.TpRetorno = TpRetornoEnum.Sucesso;
+                    obj.RetornoMensagem = "Sucesso";
+                    obj.RetornoDescricao = "Presença COnfirmada!";
+                }
+                else
+                {
+                    obj.TpRetorno = TpRetornoEnum.Erro;
+                    obj.RetornoMensagem = "Aconteceu um erro na requisição.";
+                    obj.RetornoDescricao = "Houve um erro na requisição, tente novamente. Caso o erro perista contate o professor!";
+                }
+            }
+            else
+            {
+                obj.TpRetorno = TpRetornoEnum.Erro;
+                obj.RetornoMensagem = "Erro.";
+                obj.RetornoDescricao = "Houve um erro na requisição, tente novamente!";
+            }
+
             return new HttpResponseMessage()
             {
                 Content = new StringContent(Metodos.ObjectToJson(obj)),
@@ -181,11 +204,28 @@ namespace ChamadaApp.Api.Controllers
 
             if(sitChamadaId == (int)SitChamadaEnum.Concluida)
             {
-                obj.ListRetorno = null;
+                bool resposta = ChamadaDAO.ConcluirChamada(chamadaId);
+
+                if(resposta)
+                {
+                    obj.TpRetorno = TpRetornoEnum.Sucesso;
+                    obj.RetornoMensagem = "Sucesso.";
+                    obj.RetornoDescricao = "A chamada foi concluída.";                    
+                }
+                else
+                {
+                    obj.TpRetorno = TpRetornoEnum.Erro;
+                    obj.RetornoMensagem = "Houve um erro na requisição!";
+                    obj.RetornoDescricao = "A conclusão da chamada não pode ser realizada.Tente novamente!";
+                }
             }
             else
-            {
-
+            {               
+                obj.ListRetorno = ChamadaDAO.EncerrarChamada(chamadaId, Metodos.GetCurrentTime()).Cast<object>().ToList();
+                obj.ObjTypeName = obj.ListRetorno.GetType().Name;
+                obj.TpRetorno = TpRetornoEnum.Sucesso;
+                obj.RetornoMensagem = "Sucesso.";
+                obj.RetornoDescricao = "A chamada foi encerrada.";
             }
 
             return new HttpResponseMessage()
@@ -193,17 +233,6 @@ namespace ChamadaApp.Api.Controllers
                 Content = new StringContent(Metodos.ObjectToJson(obj)),
                 StatusCode = HttpStatusCode.OK
             };
-        }
-                
-        private HttpResponseMessage GetAlunosChamadaNaoPresentes(int chamadaId)
-        {
-            Retorno obj = new Retorno();
-
-            return new HttpResponseMessage()
-            {
-                Content = new StringContent(Metodos.ObjectToJson(obj)),
-                StatusCode = HttpStatusCode.OK
-            };
-        }
+        }     
     }
 }
