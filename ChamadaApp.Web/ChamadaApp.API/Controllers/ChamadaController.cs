@@ -21,7 +21,7 @@ namespace ChamadaApp.Api.Controllers
 
             if (professorID == 0)
             {
-                obj.TpRetorno = TpRetornoEnum.Erro;
+                obj.TpRetorno = (int)TpRetornoEnum.Erro;
                 obj.RetornoMensagem = "Erro.";
                 obj.RetornoDescricao = "Ocorreu um erro inesperado no sistema. Tente novamente mais tarde!";
             }
@@ -31,13 +31,13 @@ namespace ChamadaApp.Api.Controllers
 
                 if (obj.ObjRetorno == null)
                 {
-                    obj.TpRetorno = TpRetornoEnum.SemRetorno;
+                    obj.TpRetorno = (int)TpRetornoEnum.SemRetorno;
                     obj.RetornoMensagem = "Matéria não encontrada!";
                     obj.RetornoDescricao = "Não existem matérias passíveis de chamada para esta data.";
                 }
                 else
                 {
-                    obj.TpRetorno = TpRetornoEnum.Sucesso;
+                    obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
                     obj.ObjTypeName = obj.ObjRetorno.GetType().Name;
                     obj.RetornoMensagem = "A seguinte matéria foi encontrada.";
                     obj.RetornoDescricao = "Efetue a abertura da chamada para a disponibilização aos alunos.";
@@ -58,7 +58,7 @@ namespace ChamadaApp.Api.Controllers
 
             if (materia == null)
             {
-                obj.TpRetorno = TpRetornoEnum.SemRetorno;
+                obj.TpRetorno = (int)TpRetornoEnum.SemRetorno;
                 obj.RetornoMensagem = "Houve falha na operação!";
                 obj.RetornoDescricao = "A chamada não foi aberta. Tente novamente mais tarde!";
             }
@@ -68,13 +68,13 @@ namespace ChamadaApp.Api.Controllers
 
                 if (resposta)
                 {
-                    obj.TpRetorno = TpRetornoEnum.Sucesso;
+                    obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
                     obj.RetornoMensagem = "Operação realizada com sucesso!";
                     obj.RetornoDescricao = "A chamada já está disponível para resposta de presença dos alunos.";
                 }
                 else
                 {
-                    obj.TpRetorno = TpRetornoEnum.Erro;
+                    obj.TpRetorno = (int)TpRetornoEnum.Erro;
                     obj.RetornoMensagem = "Houve falha na operação!";
                     obj.RetornoDescricao = "A chamada não foi aberta. Tente novamente mais tarde!";
                 }
@@ -94,7 +94,7 @@ namespace ChamadaApp.Api.Controllers
 
             if (professorId == 0)
             {
-                obj.TpRetorno = TpRetornoEnum.Erro;
+                obj.TpRetorno = (int)TpRetornoEnum.Erro;
                 obj.RetornoMensagem = "Houve falha na operação!";
                 obj.RetornoDescricao = "Tente novamente mais tarde!";
             }
@@ -104,13 +104,13 @@ namespace ChamadaApp.Api.Controllers
 
                 if (obj.ObjRetorno == null)
                 {
-                    obj.TpRetorno = TpRetornoEnum.SemRetorno;
+                    obj.TpRetorno = (int)TpRetornoEnum.SemRetorno;
                     obj.RetornoMensagem = "Nenhuma chamada encontrada!";
                     obj.RetornoDescricao = "No momento, não existe chamada em aberto.";
                 }
                 else
                 {
-                    obj.TpRetorno = TpRetornoEnum.Sucesso;
+                    obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
                     obj.ObjTypeName = obj.ObjRetorno.GetType().Name;
                     obj.RetornoMensagem = "Foi encontrada uma chamada em andamento!";
                     obj.RetornoDescricao = ".";
@@ -131,7 +131,7 @@ namespace ChamadaApp.Api.Controllers
 
             if(alunoID == 0)
             {
-                obj.TpRetorno = TpRetornoEnum.Erro;
+                obj.TpRetorno = (int)TpRetornoEnum.Erro;
                 obj.RetornoMensagem = "Houve falha na operação!";
                 obj.RetornoDescricao = "Tente novamente mais tarde!";
             }
@@ -141,13 +141,13 @@ namespace ChamadaApp.Api.Controllers
 
                 if(obj.ObjRetorno == null)
                 {
-                    obj.TpRetorno = TpRetornoEnum.SemRetorno;
+                    obj.TpRetorno = (int)TpRetornoEnum.SemRetorno;
                     obj.RetornoMensagem = "Nenhuma chamada encontrada!";
                     obj.RetornoDescricao = "No momento, não existe chamada em aberto a ser respondida.";
                 }
                 else
                 {
-                    obj.TpRetorno = TpRetornoEnum.Sucesso;
+                    obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
                     obj.ObjTypeName = obj.ObjRetorno.GetType().Name;
                     obj.RetornoMensagem = "Foi encontrada uma chamada a ser respondida!";
                     obj.RetornoDescricao = ".";
@@ -172,20 +172,20 @@ namespace ChamadaApp.Api.Controllers
 
                 if(resposta)
                 {
-                    obj.TpRetorno = TpRetornoEnum.Sucesso;
+                    obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
                     obj.RetornoMensagem = "Sucesso";
                     obj.RetornoDescricao = "Presença Confirmada!";
                 }
                 else
                 {
-                    obj.TpRetorno = TpRetornoEnum.Erro;
+                    obj.TpRetorno = (int)TpRetornoEnum.Erro;
                     obj.RetornoMensagem = "Aconteceu um erro na requisição.";
                     obj.RetornoDescricao = "Houve um erro na requisição, tente novamente. Caso o erro perista contate o professor!";
                 }
             }
             else
             {
-                obj.TpRetorno = TpRetornoEnum.Erro;
+                obj.TpRetorno = (int)TpRetornoEnum.Erro;
                 obj.RetornoMensagem = "Erro.";
                 obj.RetornoDescricao = "Houve um erro na requisição, tente novamente!";
             }
@@ -208,13 +208,13 @@ namespace ChamadaApp.Api.Controllers
 
                 if(resposta)
                 {
-                    obj.TpRetorno = TpRetornoEnum.Sucesso;
+                    obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
                     obj.RetornoMensagem = "Sucesso.";
                     obj.RetornoDescricao = "A chamada foi concluída.";                    
                 }
                 else
                 {
-                    obj.TpRetorno = TpRetornoEnum.Erro;
+                    obj.TpRetorno = (int)TpRetornoEnum.Erro;
                     obj.RetornoMensagem = "Houve um erro na requisição!";
                     obj.RetornoDescricao = "A conclusão da chamada não pode ser realizada.Tente novamente!";
                 }
@@ -223,7 +223,7 @@ namespace ChamadaApp.Api.Controllers
             {               
                 obj.ListRetorno = ChamadaDAO.EncerrarChamada(chamadaId, Metodos.GetCurrentTime()).Cast<object>().ToList();
                 obj.ObjTypeName = typeof(AlunoChamadaVO).Name;
-                obj.TpRetorno = TpRetornoEnum.Sucesso;
+                obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
                 obj.RetornoMensagem = "Sucesso.";
                 obj.RetornoDescricao = "A chamada foi encerrada.";
             }

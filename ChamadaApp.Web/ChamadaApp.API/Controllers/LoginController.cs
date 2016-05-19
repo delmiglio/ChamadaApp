@@ -18,7 +18,7 @@ namespace ChamadaApp.Api.Controllers
             //Verifica se os parametros foram informados.
             if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(senha))
             {             
-                obj.TpRetorno = TpRetornoEnum.Erro;
+                obj.TpRetorno = (int)TpRetornoEnum.Erro;
                 obj.RetornoMensagem = "Login Inválido!";
                 obj.RetornoDescricao = "Para efetuar o login, deverá ser informado os campos Login e Senha.";
             }
@@ -29,13 +29,13 @@ namespace ChamadaApp.Api.Controllers
 
                 if(user == null)
                 {                    
-                    obj.TpRetorno = TpRetornoEnum.SemRetorno;
+                    obj.TpRetorno = (int)TpRetornoEnum.SemRetorno;
                     obj.RetornoMensagem = "Login Inválido!";
                     obj.RetornoDescricao = "Verifique se as credenciais estão corretas!";
                 }
                 else
                 {
-                    obj.TpRetorno = TpRetornoEnum.Sucesso;
+                    
                     obj.ObjRetorno = user;
                     obj.ObjTypeName = user.GetType().Name;
                 }                
