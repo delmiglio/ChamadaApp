@@ -3,6 +3,7 @@ using ChamadaApp.Domain.DAO;
 using ChamadaApp.Domain.VO;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace ChamadaApp.Api.Controllers
@@ -10,25 +11,24 @@ namespace ChamadaApp.Api.Controllers
     [RoutePrefix("api/login")]
     public class LoginController : ApiController
     {
-        [HttpGet]        
+        [HttpGet]
         public HttpResponseMessage GetUsuarioByLogin(string login, string senha)
         {
             Retorno obj = new Retorno();
 
             //Verifica se os parametros foram informados.
             if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(senha))
-            {             
+            {
                 obj.TpRetorno = (int)TpRetornoEnum.Erro;
                 obj.RetornoMensagem = "Login Inválido!";
                 obj.RetornoDescricao = "Para efetuar o login, deverá ser informado os campos Login e Senha.";
             }
             else
             {
-
                 UsuarioVO user = LoginDAO.GetUserByLogin(login, senha);
 
-                if(user == null)
-                {                    
+                if (user == null)
+                {
                     obj.TpRetorno = (int)TpRetornoEnum.SemRetorno;
                     obj.RetornoMensagem = "Login Inválido!";
                     obj.RetornoDescricao = "Verifique se as credenciais estão corretas!";
@@ -38,7 +38,7 @@ namespace ChamadaApp.Api.Controllers
                     obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
                     obj.ObjRetorno = user;
                     obj.ObjTypeName = user.GetType().Name;
-                }                
+                }
             }
 
             return new HttpResponseMessage()
