@@ -113,7 +113,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
-    <Content Include="html\home.html" />
+    <Content Include="home.html" />
     <Content Include="js\Ajax\AjaxUtilities.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

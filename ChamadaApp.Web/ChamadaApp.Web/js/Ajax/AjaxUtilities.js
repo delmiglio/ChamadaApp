@@ -1,7 +1,4 @@
 ﻿// Métodos para que a Requisição Ajax Funcione Corretamente
-
-
-
 function GetGenerico(url) {
 
     $.ajax({

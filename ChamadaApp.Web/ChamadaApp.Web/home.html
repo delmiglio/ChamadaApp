@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistema Acadêmico v 1.0</title>
+    <meta charset="utf-8" />
+
+    <!-- CSS -->
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/toastr.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Sistema Acadêmico v 1.0</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Mostrar Professores</a></li>
+                    <li><a href="#">Mostrar Alunos</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+    <!-- Content -->
+    <!-- Tabela Exemplo-->
+    <!-- A Tabela só deve aparecer após o aluno ser pesquisado-->
+    <div class="container">
+        <div class="row col-lg-12">
+            <!-- Pesquisar Por-->
+            <h4 class="text-center">Filtros de Pesquisa:</h4>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <form name="PesquisaAluno" method="get" class="form-inline espaco-padrao">
+                    <div class="form-group col-lg-4">
+                        <label for="RA" class="col-lg-3">RA</label>
+                        <input type="text" class="form-control" placeholder="RA" id="RA" />
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="Nome" class="col-lg-3">Nome</label>
+                        <input type="text" class="form-control" placeholder="Nome" id="Nome" />
+                    </div>
+                    <div class="col-lg-4">
+                        <button onclick="PesquisaAluno()" class="btn btn-success">Pesquisar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-12">
+                <table class="table table-bordered table-hover table-responsive espaco-padrao">
+                    <thead>
+                        <td><strong>Nome</strong></td>
+                        <td><strong>Email</strong></td>
+                        <td><strong>Telefone</strong></td>
+                        <td><strong>Chamada</strong></td>
+                        <td><strong>Ações</strong></td>
+                    </thead>
+                    <tbody>
+                        <td>Guilherme</td>
+                        <td>guidelmiglio@hotmail.com</td>
+                        <td>(11) 2375-3767</td>
+                        <td>Teste</td>
+                        <td><button class="btn btn-primary" onclick="GerarSenha()">Gerar Senha</button></td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="../Scripts/jquery-2.2.3.js"></script>
+    <script src="../Scripts/jquery.validate.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+    <script src="../Scripts/toastr.js"></script>
+
+</body>
+</html>
