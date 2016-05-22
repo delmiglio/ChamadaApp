@@ -22,9 +22,8 @@ namespace ChamadaApp.Domain.VO
             this.DtCriacao = re["DTCRIACAO"].ToString();
             this.DtAlteracao = re["DTALTERACAO"].ToString();
             this.Ativo = (bool)re["ATIVO"];
-            this.TpUsuarioDesc = re["DESCRICAO"].ToString();
+            this.TpUsuarioDesc = re.Table.Columns.Contains("DESCRICAO") ? re["DESCRICAO"].ToString() : null;            
         }
-
 
         public int Id { get; set; }
 
