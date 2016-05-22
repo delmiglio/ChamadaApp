@@ -19,9 +19,10 @@ namespace ChamadaApp.Domain.VO
             this.Senha = re["SENHA"].ToString();
             this.Token = re["TOKEN"].ToString();
             this.TpUsuario = (int)re["TPUSUARIOID"];
-            this.DtCriacao = (DateTime)re["DTCRIACAO"];
-            this.DtAlteracao = (DateTime)re["DTALTERACAO"];
+            this.DtCriacao = re["DTCRIACAO"].ToString();
+            this.DtAlteracao = re["DTALTERACAO"].ToString();
             this.Ativo = (bool)re["ATIVO"];
+            this.TpUsuarioDesc = re["DESCRICAO"].ToString();
         }
 
 
@@ -39,11 +40,12 @@ namespace ChamadaApp.Domain.VO
 
         public int TpUsuario { get; set; }
 
-        public DateTime DtCriacao { get; set; }
+        public string DtCriacao { get; set; }
 
-        public DateTime DtAlteracao { get; set; }
+        public string DtAlteracao { get; set; }
 
         public bool Ativo { get; set; }
 
+        public string TpUsuarioDesc { get; set; }
     }
 }

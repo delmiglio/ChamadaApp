@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -14,7 +11,9 @@ namespace ChamadaApp.Api
             // Web API configuration and services
 
             //CORS
-            config.EnableCors();
+            var corsAttr = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(corsAttr);
+           
 
             // Web API routes
             config.MapHttpAttributeRoutes();
