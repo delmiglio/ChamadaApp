@@ -113,7 +113,7 @@ namespace ChamadaApp.Api.Controllers
                     obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
                     obj.ObjTypeName = obj.ObjRetorno.GetType().Name;
                     obj.RetornoMensagem = "Foi encontrada uma chamada em andamento!";
-                    obj.RetornoDescricao = ".";
+                    //obj.RetornoDescricao = "";
                 }
             }
 
@@ -162,13 +162,14 @@ namespace ChamadaApp.Api.Controllers
         }
 
         [HttpPut]
-        public HttpResponseMessage PutResponderChamada(int alunoChamadaId)
+        [Route("PutResponderChamada")]
+        public HttpResponseMessage PutResponderChamada([FromBody] ChamadaForPresencaVO chamadaFoPresenca = null)
         {
             Retorno obj = new Retorno();
 
-            if(alunoChamadaId > 0)
+            if(chamadaFoPresenca.Id > 0)
             {
-                bool resposta = ChamadaDAO.MarcarPresenca(alunoChamadaId, Metodos.GetCurrentTime());
+                bool resposta = ChamadaDAO.MarcarPresenca(chamadaFoPresenca.Id, Metodos.GetCurrentTime());
 
                 if(resposta)
                 {
