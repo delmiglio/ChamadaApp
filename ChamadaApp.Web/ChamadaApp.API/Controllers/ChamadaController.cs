@@ -1,5 +1,4 @@
-﻿using ChamadaApp.Api.App_Start;
-using ChamadaApp.Api.Utils;
+﻿using ChamadaApp.Api.Utils;
 using ChamadaApp.Domain.DAO;
 using ChamadaApp.Domain.ENUM;
 using ChamadaApp.Domain.VO;

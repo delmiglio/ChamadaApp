@@ -63,7 +63,7 @@ namespace ChamadaApp.Api
             );
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
+                name: "ControllerAndActionName",
                 routeTemplate: "api/{controller}/{action}"
             );
         }        
