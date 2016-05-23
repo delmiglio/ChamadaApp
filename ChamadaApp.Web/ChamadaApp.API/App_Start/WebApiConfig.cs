@@ -11,9 +11,8 @@ namespace ChamadaApp.Api
             // Web API configuration and services
 
             //CORS
-            var corsAttr = new EnableCorsAttribute("*", "*", "*");
-            config.EnableCors(corsAttr);
-           
+            //var corsAttr = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors();
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -22,6 +21,11 @@ namespace ChamadaApp.Api
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "ControllerAndAction",
+                routeTemplate: "api/{controller}/{action}"
             );
 
             // Necessário Para Habilitar o Retorno de JSON neste formato: matheusSouzaLima: 

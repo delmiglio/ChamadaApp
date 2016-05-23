@@ -1,4 +1,5 @@
-﻿using ChamadaApp.Api.Utils;
+﻿using ChamadaApp.Api.App_Start;
+using ChamadaApp.Api.Utils;
 using ChamadaApp.Domain.DAO;
 using ChamadaApp.Domain.ENUM;
 using ChamadaApp.Domain.VO;
@@ -11,7 +12,8 @@ using System.Web.Http;
 
 namespace ChamadaApp.Api.Controllers
 {
-    [RoutePrefix("api/chamada")]
+    //[MyCors]
+    [RoutePrefix("api/chamada")]   
     public class ChamadaController : ApiController
     {
         [HttpGet]
@@ -51,7 +53,7 @@ namespace ChamadaApp.Api.Controllers
             };
         }
 
-        [HttpPost]
+        [HttpPost]        
         public HttpResponseMessage PostAbrirChamada([FromBody] MateriaForChamadaVO materia)
         {
             Retorno obj = new Retorno();
@@ -150,7 +152,7 @@ namespace ChamadaApp.Api.Controllers
                     obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
                     obj.ObjTypeName = obj.ObjRetorno.GetType().Name;
                     obj.RetornoMensagem = "Foi encontrada uma chamada a ser respondida!";
-                    obj.RetornoDescricao = ".";
+                    //obj.RetornoDescricao = ".";
                 }
             }
 
@@ -162,14 +164,14 @@ namespace ChamadaApp.Api.Controllers
         }
 
         [HttpPut]
-        [Route("PutResponderChamada")]
-        public HttpResponseMessage PutResponderChamada([FromBody] ChamadaForPresencaVO chamadaFoPresenca = null)
+        [ActionName("ResponderChamada")]
+        public HttpResponseMessage PostResponderChamada([FromBody] ChamadaForPresencaVO alunoChamada)
         {
             Retorno obj = new Retorno();
 
-            if(chamadaFoPresenca.Id > 0)
+            if(alunoChamada.Id > 0)
             {
-                bool resposta = ChamadaDAO.MarcarPresenca(chamadaFoPresenca.Id, Metodos.GetCurrentTime());
+                bool resposta = ChamadaDAO.MarcarPresenca(alunoChamada.Id, Metodos.GetCurrentTime());
 
                 if(resposta)
                 {
