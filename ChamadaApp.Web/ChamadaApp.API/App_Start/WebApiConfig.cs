@@ -6,13 +6,13 @@ namespace ChamadaApp.Api
 {
     public static class WebApiConfig
     {
-        public static void Register(HttpConfiguration config)
+        /*public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
 
             //CORS
-            //var corsAttr = new EnableCorsAttribute("*", "*", "*");
-            config.EnableCors();
+            var corsAttr = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(corsAttr);
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -31,6 +31,41 @@ namespace ChamadaApp.Api
             // Necessário Para Habilitar o Retorno de JSON neste formato: matheusSouzaLima: 
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
+        }*/
+
+        public static void Register(HttpConfiguration config)
+        {
+            //CORS
+            EnableCrossSiteRequests(config);
+
+            // Web API routes
+            AddRoutes(config);
+
+            // Necessário Para Habilitar o Retorno de JSON neste formato: matheusSouzaLima: 
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
         }
+
+        private static void EnableCrossSiteRequests(HttpConfiguration config)
+        {
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
+        }
+
+        private static void AddRoutes(HttpConfiguration config)
+        {
+            config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{action}"
+            );
+        }        
     }
 }
