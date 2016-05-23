@@ -5,34 +5,7 @@ using System.Web.Http.Cors;
 namespace ChamadaApp.Api
 {
     public static class WebApiConfig
-    {
-        /*public static void Register(HttpConfiguration config)
-        {
-            // Web API configuration and services
-
-            //CORS
-            var corsAttr = new EnableCorsAttribute("*", "*", "*");
-            config.EnableCors(corsAttr);
-
-            // Web API routes
-            config.MapHttpAttributeRoutes();
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
-
-            config.Routes.MapHttpRoute(
-                name: "ControllerAndAction",
-                routeTemplate: "api/{controller}/{action}"
-            );
-
-            // Necessário Para Habilitar o Retorno de JSON neste formato: matheusSouzaLima: 
-            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
-        }*/
-
+    {       
         public static void Register(HttpConfiguration config)
         {
             //CORS
@@ -46,12 +19,20 @@ namespace ChamadaApp.Api
             config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
         }
 
+        /// <summary>
+        /// Habilita o CORS, permitindo a origem, rotas e metodos para acesso externo
+        /// </summary>
+        /// <param name="config">Config da Web Api</param>
         private static void EnableCrossSiteRequests(HttpConfiguration config)
         {
             var cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
         }
 
+        /// <summary>
+        /// Configuração das rotas
+        /// </summary>
+        /// <param name="config">Config da Web Api</param>
         private static void AddRoutes(HttpConfiguration config)
         {
             config.MapHttpAttributeRoutes();
@@ -60,11 +41,6 @@ namespace ChamadaApp.Api
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
-            );
-
-            config.Routes.MapHttpRoute(
-                name: "ControllerAndActionName",
-                routeTemplate: "api/{controller}/{action}"
             );
         }        
     }
