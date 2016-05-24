@@ -323,9 +323,9 @@ namespace ChamadaApp.Domain.DAO
                                         " INNER JOIN HORARIOMATERIAPROFTURMA ON HORARIOMATERIAPROFTURMA.ID = CHAMADA.HORARIOMATERIAPROFTURMAID" +
                                         " INNER JOIN MATERIAPROFTURMA ON MATERIAPROFTURMA.ID = HORARIOMATERIAPROFTURMA.MATERIAPROFTURMAID" +
 
-                                        " WHERE MATERIAPROFTURMA.PROFESSORID = {0} AND CHAMADA.SITCHAMADA = {1} AND MATERIAPROFTURMA.ATIVO = 1" +
+                                        " WHERE MATERIAPROFTURMA.PROFESSORID = {0} AND CHAMADA.SITCHAMADA = {1} AND CHAMADA.DTCHAMADA = \'{2}\'" +
 
-                                        " AND HORARIOMATERIAPROFTURMA.ATIVO = 1", professorId, sitChamadaId);
+                                        " AND MATERIAPROFTURMA.ATIVO = 1 AND HORARIOMATERIAPROFTURMA.ATIVO = 1", professorId, sitChamadaId, DateTime.Today.ToString("dd/MM/yyyy"));
 
             DataTable data = MetodosDAO.ExecutaSelect(query);
 
