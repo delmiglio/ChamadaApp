@@ -17,16 +17,17 @@ namespace ChamadaApp.Api.Controllers
         [Route("gerarSenha")]
         public async Task<HttpResponseMessage> GerarSenha(AlunoVO aluno)
         {
+            string token = Metodos.GerarToken();
+
             var retorno = new Retorno()
             {
                 RetornoMensagem = "Funcionou!!!",
-                RetornoDescricao = "AEEEEE",
+                RetornoDescricao = token,
                 ObjRetorno = aluno,
                 ObjTypeName = GetType().Name,
                 TpRetorno = (int)TpRetornoEnum.Sucesso
 
             };
-
 
             return new HttpResponseMessage
             {
