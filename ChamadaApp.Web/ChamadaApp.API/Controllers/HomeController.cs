@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
 namespace ChamadaApp.Api.Controllers
 {
-    [RoutePrefix("api/home")]
     public class HomeController : ApiController
     {
         public HttpResponseMessage Get()

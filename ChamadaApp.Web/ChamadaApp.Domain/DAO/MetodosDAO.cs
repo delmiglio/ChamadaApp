@@ -12,6 +12,11 @@ namespace ChamadaApp.Domain.DAO
 {
     public static class MetodosDAO
     {
+        /// <summary>
+        /// Execulta uma comando select no banco de dados
+        /// </summary>
+        /// <param name="sql">comando de seleção</param>
+        /// <returns>o resultado do comando</returns>
         public static DataTable ExecutaSelect(string sql)
         {
             SqlConnection conexao = ConexaoDAO.GetConexao();
@@ -38,6 +43,24 @@ namespace ChamadaApp.Domain.DAO
             {
                 conexao.Close();
             }
-        }            
+        }
+
+        /// <summary>
+        /// Executa um determinado comando no banco de dados
+        /// </summary>
+        /// <param name="sql">Inserir, Altera e Excluir</param>
+        public static void ExecutaSQL(string sql)
+        {
+            SqlConnection conexao = ConexaoDAO.GetConexao();
+            try
+            {
+                SqlCommand comando = new SqlCommand(sql, conexao);
+                comando.ExecuteNonQuery();
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
     }
 }

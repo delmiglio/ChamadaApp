@@ -1,1 +1,13 @@
-﻿
+﻿/* Centraliza o Texto do Centro das Tabelas*/
+.table td{
+    text-align: center;
+}
+
+.center-table{
+    margin: 0 !important;
+    float: none !important;
+}
+
+.espaco-padrao{
+    margin-top: 20px;
+}
