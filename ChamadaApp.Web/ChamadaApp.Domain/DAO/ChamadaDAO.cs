@@ -318,14 +318,22 @@ namespace ChamadaApp.Domain.DAO
 
         public static ChamadaVO GetChamadaAbertaByProfessorId(int professorId, int sitChamadaId)
         {
-            string query = string.Format("SELECT CHAMADA.* FROM CHAMADA" +
+            string query = string.Format("SELECT CHAMADA.ID, CHAMADA.DTCHAMADA, CHAMADA.HORAINICIO, CHAMADA.HORATERMINO, SITCHAMADA.DESCRICAO, " +
+                                        " MATERIA.DESCRICAO AS 'MATERIA', MODULO.DESCRICAO AS 'MODULO', CURSO.DESCRICAO AS 'CURSO' FROM CHAMADA" +
 
+                                        " INNER JOIN SITCHAMADA ON SITCHAMADA.ID = CHAMADA.SITCHAMADA" +
                                         " INNER JOIN HORARIOMATERIAPROFTURMA ON HORARIOMATERIAPROFTURMA.ID = CHAMADA.HORARIOMATERIAPROFTURMAID" +
                                         " INNER JOIN MATERIAPROFTURMA ON MATERIAPROFTURMA.ID = HORARIOMATERIAPROFTURMA.MATERIAPROFTURMAID" +
+                                        " INNER JOIN MATERIACURSO ON MATERIACURSO.ID = MATERIAPROFTURMA.MATERIACURSOID" +
+                                        " INNER JOIN MATERIA ON MATERIA.ID = MATERIACURSO.MATERIAID" +
+                                        " INNER JOIN TURMAMODULO ON TURMAMODULO.ID = MATERIAPROFTURMA.TURMAMODULOID" +
+                                        " INNER JOIN MODULO ON MODULO.ID = TURMAMODULO.MODULOID" +
+                                        " INNER JOIN TURMA ON TURMA.ID = TURMAMODULO.TURMAID" +
+                                        " INNER JOIN CURSO ON CURSO.ID = TURMA.CURSOID" +
 
-                                        " WHERE MATERIAPROFTURMA.PROFESSORID = {0} AND CHAMADA.SITCHAMADA = {1} AND MATERIAPROFTURMA.ATIVO = 1" +
+                                        " WHERE MATERIAPROFTURMA.PROFESSORID = {0} AND CHAMADA.SITCHAMADA = {1} AND CHAMADA.DTCHAMADA = \'{2}\'" +
 
-                                        " AND HORARIOMATERIAPROFTURMA.ATIVO = 1", professorId, sitChamadaId);
+                                        " AND MATERIAPROFTURMA.ATIVO = 1 AND HORARIOMATERIAPROFTURMA.ATIVO = 1", professorId, sitChamadaId, DateTime.Today.ToString("dd/MM/yyyy"));
 
             DataTable data = MetodosDAO.ExecutaSelect(query);
 
