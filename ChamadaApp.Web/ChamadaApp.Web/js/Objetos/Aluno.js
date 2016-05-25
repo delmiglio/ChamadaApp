@@ -34,12 +34,16 @@
 }
 
 
-function GeraSenhaAluno() {
+function GerarToken() {
 
-    var aluno = new Aluno();
-    if (!aluno)
-        PostGenerico("http://localhost:8090/api/usuario/", aluno);
+    //var aluno = new Aluno();
+    var resultado;
+    
+    
+        resultado = PostGenerico("http://localhost:8090/api/usuario/", null);
 
+    if(resultado.length > 0)
+        toastr.info(resultado.retorno.RetornoMensagem);
 }
 
 function GetAlunos(ra, nome) {
