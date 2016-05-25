@@ -11,11 +11,11 @@ using System.Web.Http;
 
 namespace ChamadaApp.Api.Controllers
 {
-    //[MyCors]
-    [RoutePrefix("api/chamada")]   
+    [RoutePrefix("api/chamada")]
     public class ChamadaController : ApiController
     {
         [HttpGet]
+        [ActionName("MateriaNovaChamada")]
         public HttpResponseMessage GetMateriaForChamada(int professorID)
         {
             Retorno obj = new Retorno();
@@ -28,7 +28,7 @@ namespace ChamadaApp.Api.Controllers
             }
             else
             {
-                obj.ObjRetorno = ChamadaDAO.GetMateriaForChamada(Metodos.GetDiaDaSemana(), Metodos.GetCurrentTime(), professorID, (int)SitChamadaEnum.Aberta);
+                obj.ObjRetorno = ChamadaDAO.GetMateriaForChamada(Metodos.GetDiaDaSemana(), Metodos.GetCurrentTime(), professorID);
 
                 if (obj.ObjRetorno == null)
                 {
@@ -52,43 +52,8 @@ namespace ChamadaApp.Api.Controllers
             };
         }
 
-        [HttpPost]        
-        public HttpResponseMessage PostAbrirChamada([FromBody] MateriaForChamadaVO materia)
-        {
-            Retorno obj = new Retorno();
-
-            if (materia == null)
-            {
-                obj.TpRetorno = (int)TpRetornoEnum.SemRetorno;
-                obj.RetornoMensagem = "Houve falha na operação!";
-                obj.RetornoDescricao = "A chamada não foi aberta. Tente novamente mais tarde!";
-            }
-            else
-            {
-                bool resposta = ChamadaDAO.AbrirChamada(materia, Metodos.GetCurrentTime());
-
-                if (resposta)
-                {
-                    obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
-                    obj.RetornoMensagem = "Operação realizada com sucesso!";
-                    obj.RetornoDescricao = "A chamada já está disponível para resposta de presença dos alunos.";
-                }
-                else
-                {
-                    obj.TpRetorno = (int)TpRetornoEnum.Erro;
-                    obj.RetornoMensagem = "Houve falha na operação!";
-                    obj.RetornoDescricao = "A chamada não foi aberta. Tente novamente mais tarde!";
-                }
-            }            
-
-            return new HttpResponseMessage()
-            {
-                Content = new StringContent(Metodos.ObjectToJson(obj)),
-                StatusCode = HttpStatusCode.OK
-            };
-        }
-
         [HttpGet]
+        [ActionName("ChamadaAberta")]
         public HttpResponseMessage GetChamadaProfessor(int professorId, int sitChamadaId)
         {
             Retorno obj = new Retorno();
@@ -124,34 +89,34 @@ namespace ChamadaApp.Api.Controllers
                 StatusCode = HttpStatusCode.OK
             };
         }
-        
-        [HttpGet]        
-        public HttpResponseMessage GetChamadaAluno(int alunoID)
+
+        [HttpPost]
+        [ActionName("AbrirChamada")]
+        public HttpResponseMessage PostAbrirChamada([FromBody] MateriaForChamadaVO materia)
         {
             Retorno obj = new Retorno();
 
-            if(alunoID == 0)
+            if (materia == null)
             {
-                obj.TpRetorno = (int)TpRetornoEnum.Erro;
+                obj.TpRetorno = (int)TpRetornoEnum.SemRetorno;
                 obj.RetornoMensagem = "Houve falha na operação!";
-                obj.RetornoDescricao = "Tente novamente mais tarde!";
+                obj.RetornoDescricao = "A chamada não foi aberta. Tente novamente mais tarde!";
             }
             else
             {
-                obj.ObjRetorno = ChamadaDAO.GetChamadaAbertaByAlunoId(alunoID, (int)SitAlunoChamadaEnum.AguardandoChamada);
+                bool resposta = ChamadaDAO.AbrirChamada(materia, Metodos.GetCurrentTime());
 
-                if(obj.ObjRetorno == null)
+                if (resposta)
                 {
-                    obj.TpRetorno = (int)TpRetornoEnum.SemRetorno;
-                    obj.RetornoMensagem = "Nenhuma chamada encontrada!";
-                    obj.RetornoDescricao = "No momento, não existe chamada em aberto a ser respondida.";
+                    obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
+                    obj.RetornoMensagem = "Operação realizada com sucesso!";
+                    obj.RetornoDescricao = "A chamada já está disponível para resposta de presença dos alunos.";
                 }
                 else
                 {
-                    obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
-                    obj.ObjTypeName = obj.ObjRetorno.GetType().Name;
-                    obj.RetornoMensagem = "Foi encontrada uma chamada a ser respondida!";
-                    //obj.RetornoDescricao = ".";
+                    obj.TpRetorno = (int)TpRetornoEnum.Erro;
+                    obj.RetornoMensagem = "Houve falha na operação!";
+                    obj.RetornoDescricao = "A chamada não foi aberta. Tente novamente mais tarde!";
                 }
             }
 
@@ -160,81 +125,46 @@ namespace ChamadaApp.Api.Controllers
                 Content = new StringContent(Metodos.ObjectToJson(obj)),
                 StatusCode = HttpStatusCode.OK
             };
-        }
-
+        }       
+                
         [HttpPut]
-        [ActionName("ResponderChamada")]
-        public HttpResponseMessage PostResponderChamada([FromBody] ChamadaForPresencaVO alunoChamada)
+        [ActionName("EncerrarChamada")]
+        public HttpResponseMessage PutEncerrarChamada([FromBody] ChamadaVO chamada)
         {
             Retorno obj = new Retorno();
 
-            if(alunoChamada.Id > 0)
+            if (chamada != null)
             {
-                bool resposta = ChamadaDAO.MarcarPresenca(alunoChamada.Id, Metodos.GetCurrentTime());
-
-                if(resposta)
-                {
-                    obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
-                    obj.RetornoMensagem = "Sucesso";
-                    obj.RetornoDescricao = "Presença Confirmada!";
-                }
-                else
-                {
-                    obj.TpRetorno = (int)TpRetornoEnum.Erro;
-                    obj.RetornoMensagem = "Aconteceu um erro na requisição.";
-                    obj.RetornoDescricao = "Houve um erro na requisição, tente novamente. Caso o erro perista contate o professor!";
-                }
-            }
-            else
-            {
-                obj.TpRetorno = (int)TpRetornoEnum.Erro;
-                obj.RetornoMensagem = "Erro.";
-                obj.RetornoDescricao = "Houve um erro na requisição, tente novamente!";
-            }
-
-            return new HttpResponseMessage()
-            {
-                Content = new StringContent(Metodos.ObjectToJson(obj)),
-                StatusCode = HttpStatusCode.OK
-            };
-        }
-
-        [HttpPut]
-        public HttpResponseMessage PutManterChamada(int chamadaId, int sitChamadaId)
-        {
-            Retorno obj = new Retorno();
-
-            if(sitChamadaId == (int)SitChamadaEnum.Concluida)
-            {
-                bool resposta = ChamadaDAO.ConcluirChamada(chamadaId);
-
-                if(resposta)
-                {
-                    obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
-                    obj.RetornoMensagem = "Sucesso.";
-                    obj.RetornoDescricao = "A chamada foi concluída.";                    
-                }
-                else
-                {
-                    obj.TpRetorno = (int)TpRetornoEnum.Erro;
-                    obj.RetornoMensagem = "Houve um erro na requisição!";
-                    obj.RetornoDescricao = "A conclusão da chamada não pode ser realizada.Tente novamente!";
-                }
-            }
-            else
-            {               
-                obj.ListRetorno = ChamadaDAO.EncerrarChamada(chamadaId, Metodos.GetCurrentTime()).Cast<object>().ToList();
+                obj.ListRetorno = ChamadaDAO.EncerrarChamada(chamada.Id, Metodos.GetCurrentTime()).Cast<object>().ToList();
                 obj.ObjTypeName = typeof(AlunoChamadaVO).Name;
                 obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
                 obj.RetornoMensagem = "Sucesso.";
                 obj.RetornoDescricao = "A chamada foi encerrada.";
             }
+            else
+            {
+                obj.TpRetorno = (int)TpRetornoEnum.SemRetorno;
+                obj.RetornoMensagem = "Tente Novamente.";
+                obj.RetornoDescricao = "A chamada não foi encerrada.";
+            }
 
             return new HttpResponseMessage()
             {
                 Content = new StringContent(Metodos.ObjectToJson(obj)),
                 StatusCode = HttpStatusCode.OK
             };
-        }     
+        }
+
+        /*public HttpResponseMessage PutConcluirChamada([FromBody] ChamadaVO chamada)
+        {
+            Retorno obj = new Retorno();
+
+
+            return new HttpResponseMessage()
+            {
+                Content = new StringContent(Metodos.ObjectToJson(obj)),
+                StatusCode = HttpStatusCode.OK
+            };
+        }*/
     }
 }
