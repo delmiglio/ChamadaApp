@@ -44,5 +44,19 @@ namespace ChamadaApp.Api.Utils
         {
             return DateTime.Now.ToShortTimeString();
         }
+
+        public static string GerarToken()
+        {
+            string token = "";
+            Random randon = new Random();
+
+            for (int n = 0; n < 4; n++)
+                token += (char)randon.Next(96, 123);
+
+            for (int n = 0; n < 2; n++)
+                token += randon.Next(0, 10);
+
+            return token;
+        }
     }
 }

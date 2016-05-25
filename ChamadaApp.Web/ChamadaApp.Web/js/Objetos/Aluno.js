@@ -1,14 +1,14 @@
 ﻿var Aluno = function (id, login, nome, sobrenome, senha,
-    token, tpUsuario, dtCriacao, dtAlteracao) {
+    token, tpUsuario, dtCriacao, dtAlteracao, ativo) {
 
     if (id)
-        this.Id = id;
+        this.Id = 1;
 
     if (login)
-        this.Login = login;
+        this.Login = "login";
 
     if (nome)
-        this.Nome = nome;
+        this.Nome = "nome";
 
     if (sobrenome)
         this.Sobrenome = sobrenome;
@@ -29,17 +29,21 @@
         this.DtCriacao = dtCriacao;
 
     if (ativo)
-        this.Ativo = ativo;
+        this.Ativo = 1;
 
 }
 
 
-function GeraSenhaAluno() {
+function GerarToken() {
 
-    var aluno = new Aluno();
-    if (!aluno)
-        PostGenerico("http://localhost:8090/api/usuario/", aluno);
+    //var aluno = new Aluno();
+    var resultado;
+    
+    
+        resultado = PostGenerico("http://localhost:8090/api/usuario/", new Aluno())
 
+    if(resultado.length > 0)
+        toastr.info(resultado.retorno.RetornoMensagem);
 }
 
 function GetAlunos(ra, nome) {
