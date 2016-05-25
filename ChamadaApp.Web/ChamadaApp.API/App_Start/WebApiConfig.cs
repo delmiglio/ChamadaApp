@@ -5,7 +5,7 @@ using System.Web.Http.Cors;
 namespace ChamadaApp.Api
 {
     public static class WebApiConfig
-    {       
+    {
         public static void Register(HttpConfiguration config)
         {
             //CORS
@@ -42,6 +42,6 @@ namespace ChamadaApp.Api
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-        }        
+        }
     }
 }

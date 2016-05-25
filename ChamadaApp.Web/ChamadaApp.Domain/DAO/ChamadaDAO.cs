@@ -16,7 +16,7 @@ namespace ChamadaApp.Domain.DAO
         /// <param name="currTime">horas e minutos atuais</param>
         /// <param name="professorId">id do professor que leciona a matéria</param>
         /// <returns></returns>
-        public static MateriaForChamadaVO GetMateriaForChamada(string diaSemana, string currTime, int professorId, int sitChamadaId)
+        public static MateriaForChamadaVO GetMateriaForChamada(string diaSemana, string currTime, int professorId)
         {
             try
             {
@@ -43,9 +43,9 @@ namespace ChamadaApp.Domain.DAO
 
                                                 " AND MODULO.ATIVO = 1 AND(HORARIOMATERIAPROFTURMA.ID NOT IN" +
 
-                                                " (SELECT CHAMADA.HORARIOMATERIAPROFTURMAID FROM CHAMADA WHERE CHAMADA.SITCHAMADA = {3}" +
+                                                " (SELECT CHAMADA.HORARIOMATERIAPROFTURMAID FROM CHAMADA WHERE" +
 
-                                                " AND CHAMADA.DTCHAMADA <> GETDATE()))", diaSemana, currTime, professorId, sitChamadaId);
+                                                " CHAMADA.DTCHAMADA <> GETDATE()))", diaSemana, currTime, professorId);
 
                 DataTable data = MetodosDAO.ExecutaSelect(query);
 

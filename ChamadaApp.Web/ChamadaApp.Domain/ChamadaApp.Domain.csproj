@@ -48,6 +48,7 @@
     <Compile Include="ENUM\SitAlunoChamadaEnum.cs" />
     <Compile Include="ENUM\SitChamadaEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VO\AlunoChamadaAlteracaoVO.cs" />
     <Compile Include="VO\AlunoChamadaVO.cs" />
     <Compile Include="VO\AlunoVO.cs" />
     <Compile Include="VO\ChamadaForPresencaVO.cs" />
