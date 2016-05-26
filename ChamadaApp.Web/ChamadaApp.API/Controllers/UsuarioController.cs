@@ -37,7 +37,7 @@ namespace ChamadaApp.Api.Controllers
         }
 
         [HttpGet]
-        public HttpResponseMessage Get(string ra = null, string nomeSobrenome = null)
+        public HttpResponseMessage GetAlunos(string ra = null, string nomeSobrenome = null)
         {
             Retorno retorno = new Retorno();
 

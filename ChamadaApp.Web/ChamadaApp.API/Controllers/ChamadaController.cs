@@ -1,8 +1,6 @@
 ﻿using ChamadaApp.Api.Utils;
 using ChamadaApp.Domain.DAO;
-using ChamadaApp.Domain.ENUM;
 using ChamadaApp.Domain.VO;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
