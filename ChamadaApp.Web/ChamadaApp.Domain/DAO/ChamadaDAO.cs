@@ -133,9 +133,14 @@ namespace ChamadaApp.Domain.DAO
             return alunosNaoPresentes;
         }
 
-        public static bool ConcluirChamada(int chamadaId)
+        public static bool ConcluirChamada(int chamadaId, List<AlunoChamadaAlteracaoVO> alunos)
         {
             bool retorno;
+
+            foreach(AlunoChamadaAlteracaoVO aluno in alunos)
+            {
+                MarcarPresenca(aluno.Id, DateTime.Now.ToShortTimeString());
+            }
 
             SqlConnection con = ConexaoDAO.GetConexao();
 

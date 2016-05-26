@@ -161,9 +161,24 @@ namespace ChamadaApp.Api.Controllers
         {
             Retorno obj = new Retorno();
 
-            if(chamada == null)
+            if(chamada != null)
             {
+                ChamadaVO chamadaObj = Metodos.JsonToCustomObject<ChamadaVO>(chamada.ObjRetorno);
+                List<AlunoChamadaAlteracaoVO> alunos = Metodos.JsonToCustomObject<AlunoChamadaAlteracaoVO>(chamada.ListRetorno);
 
+                bool resposta = ChamadaDAO.ConcluirChamada(chamadaObj.Id, alunos);
+
+                if (resposta)
+                {
+                    obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
+                    obj.RetornoMensagem = "Chamada Concluída.";
+                }
+                else
+                {
+                    obj.TpRetorno = (int)TpRetornoEnum.Erro;
+                    obj.RetornoMensagem = "Falha na operação";
+                    obj.RetornoDescricao = "Tente novamente.";
+                }                
             }
 
             return new HttpResponseMessage()
