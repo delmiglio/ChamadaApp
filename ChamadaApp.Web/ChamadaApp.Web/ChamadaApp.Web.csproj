@@ -86,6 +86,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="js\Metodos\ControleTela.js" />
     <Content Include="js\Metodos\MontaTabela.js" />
     <Content Include="js\Objetos\Aluno.js" />
     <Content Include="packages.config" />
