@@ -155,16 +155,22 @@ namespace ChamadaApp.Api.Controllers
             };
         }
 
-        /*public HttpResponseMessage PutConcluirChamada([FromBody] ChamadaVO chamada)
+        [HttpPost]
+        [ActionName("ConcluirChamada")]
+        public HttpResponseMessage PutConcluirChamada([FromBody] Retorno chamada)//[FromBody] ChamadaVO chamada, [FromBody] AlunoChamadaAlteracaoVO alunos)
         {
             Retorno obj = new Retorno();
 
+            if(chamada == null)
+            {
+
+            }
 
             return new HttpResponseMessage()
             {
                 Content = new StringContent(Metodos.ObjectToJson(obj)),
                 StatusCode = HttpStatusCode.OK
             };
-        }*/
+        }
     }
 }
