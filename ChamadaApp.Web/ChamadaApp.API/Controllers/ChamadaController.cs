@@ -33,8 +33,7 @@ namespace ChamadaApp.Api.Controllers
                 if (obj.ObjRetorno == null)
                 {
                     obj.TpRetorno = (int)TpRetornoEnum.SemRetorno;
-                    obj.RetornoMensagem = "Matéria não encontrada!";
-                    obj.RetornoDescricao = "Não existem matérias passíveis de chamada para esta data.";
+                    obj.RetornoMensagem = "No momento não existem matérias passíveis de chamada configuradas para esta data e horário para a respectiva turma.";                   
                 }
                 else
                 {
