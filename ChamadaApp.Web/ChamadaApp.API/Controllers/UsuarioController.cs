@@ -6,7 +6,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Cors;
 
 namespace ChamadaApp.Api.Controllers
 {
@@ -37,7 +36,7 @@ namespace ChamadaApp.Api.Controllers
         }
 
         [HttpGet]
-        public HttpResponseMessage Get(string ra = null, string nomeSobrenome = null)
+        public HttpResponseMessage GetAlunos(string ra = null, string nomeSobrenome = null)
         {
             Retorno retorno = new Retorno();
 

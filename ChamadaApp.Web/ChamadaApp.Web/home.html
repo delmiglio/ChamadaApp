@@ -23,14 +23,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Trabalho de Conclusão de Curso - Desenvolvido por: Daniel Noronha Canuto, Guilherme Oliveira Delmiglio e William Neres Pessoa</a>
+                <a class="navbar-brand" href="#">Trabalho de Conclusão de Curso</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <!--<li><a href="#">Mostrar Professores</a></li>
-                    <li><a href="#">Mostrar Alunos</a></li>-->
+                    <li><a id="chamada" href="#">Pesquisa de Chamadas</a></li>
+                    <li><a id="aluno" href="#">Pesquisa de Alunos</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -38,9 +38,9 @@
 
 
     <!-- Content -->
-    <!-- Tabela Exemplo-->
+    <!-- Tabela De Alunos-->
     <!-- A Tabela só deve aparecer após o aluno ser pesquisado-->
-    <div class="container">
+    <div class="container" id="tabela-alunos" style="display: none">
         <div class="row col-lg-12">
             <!-- Pesquisar Por-->
             <h4 class="text-center">Filtros de Pesquisa:</h4>
@@ -56,11 +56,8 @@
                         <label for="Nome" class="control-label">Pesquise por Nome:</label>
                         <input type="text" class="form-control" placeholder="Nome" id="Nome" />
                     </div>
-                    <div class="col-lg-1">
-                        <button onclick="GetAlunos()" class="btn btn-success">Pesquisar</button>
-                    </div>
-                    <div class="col-lg-1">
-                        <button onclick="GerarToken()" class="btn btn-success">Teste Token</button>
+                    <div class="form-group">
+                        <button onclick="GetAlunos()" class="btn btn-success form-control espaco-padrao">Pesquisar</button>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -73,7 +70,7 @@
                                     <td><strong>Ações</strong></td>
                                 </tr>
                             </thead>
-                            <tbody id="corpoTabela"></tbody>
+                            <tbody id="corpoTabelaAluno"></tbody>
                         </table>
                     </div>
                 </div>
@@ -81,7 +78,60 @@
         </div>
     </div>
 
-
+    <!-- Tabela De Chamada-->
+    <!-- A Tabela só deve aparecer após a chamada ser pesquisado-->
+    <div class="container" id="tabela-chamada" style="display: none">
+        <div class="row col-lg-12">
+            <!-- Pesquisar Por-->
+            <h4 class="text-center">Filtros de Pesquisa:</h4>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-inline espaco-padrao">
+                    <div class="form-group col-lg-3">
+                        <label for="RA" class="control-label">Pesquise por Curso:</label>
+                        <input type="text" class="form-control" placeholder="Curso" id="Curso" />
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label for="Nome" class="control-label">Pesquise por modulo:</label>
+                        <input type="text" class="form-control" placeholder="Modulo" id="Modulo" />
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label for="Nome" class="control-label">Pesquise por Matéria:</label>
+                        <input type="text" class="form-control" placeholder="Matéria" id="Materia" />
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label for="Nome" class="control-label">Pesquise por Data:</label>
+                        <input type="text" class="form-control" placeholder="Data" id="Data" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-5">
+                <button onclick="GetChamada()" class="btn btn-success">Pesquisar</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="table">
+                    <table class="table table-bordered table-hover table-responsive espaco-padrao">
+                        <thead>
+                            <tr>
+                                <td><strong>Data</strong></td>
+                                <td><strong>Curso</strong></td>
+                                <td><strong>Modulo</strong></td>
+                                <td><strong>Materia</strong></td>
+                                <td><strong>Ações</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody id="corpoTabelaChamada"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script src="Scripts/jquery-2.2.3.js"></script>
@@ -91,6 +141,7 @@
     <script src="js/Ajax/AjaxUtilities.js"></script>
     <script src="js/Objetos/Aluno.js"></script>
     <script src="js/Metodos/MontaTabela.js"></script>
+    <script src="js/Metodos/ControleTela.js"></script>
 
 </body>
 </html>
