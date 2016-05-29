@@ -16,11 +16,9 @@ namespace ChamadaApp.Domain.DAO
             {
                 string query = "SELECT USUARIO.*, TPUSUARIO.DESCRICAO " +
 
-                               " FROM USUARIO INNER JOIN TPUSUARIO ON TPUSUARIO.ID = USUARIO.TPUSUARIOID " +
+                               " FROM USUARIO INNER JOIN TPUSUARIO ON TPUSUARIO.ID = USUARIO.TPUSUARIOID ";                               
 
-                               " WHERE USUARIO.ATIVO = 1 ";
-
-                string where = " AND ";
+                string where = " WHERE ";
 
                 if (!string.IsNullOrWhiteSpace(ra))
                     where += String.Format("USUARIO.[LOGIN] LIKE '%{0}%'",ra);

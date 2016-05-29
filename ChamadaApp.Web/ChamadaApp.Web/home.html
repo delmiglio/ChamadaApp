@@ -30,7 +30,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a id="chamada" href="#">Pesquisa de Chamadas</a></li>
-                    <li><a id="aluno" href="#">Pesquisa de Alunos</a></li>
+                    <li><a id="aluno" href="#">Pesquisa de Usuários</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -49,8 +49,8 @@
             <div class="col-lg-12">
                 <div class="form-inline espaco-padrao">
                     <div class="form-group col-lg-3">
-                        <label for="RA" class="control-label">Pesquise por RA:</label>
-                        <input type="text" class="form-control" placeholder="RA" id="RA" />
+                        <label for="RA" class="control-label">Pesquise por Matrícula:</label>
+                        <input type="text" class="form-control" placeholder="Nº Matrícula" id="RA" />
                     </div>
                     <div class="form-group col-lg-3">
                         <label for="Nome" class="control-label">Pesquise por Nome:</label>
@@ -65,8 +65,11 @@
                         <table class="table table-bordered table-hover table-responsive espaco-padrao">
                             <thead>
                                 <tr>
+                                    <td><strong>Mátrícula</strong></td>
                                     <td><strong>Nome</strong></td>
                                     <td><strong>Sobrenome</strong></td>
+                                    <td><strong>Tipo de Usuário</strong></td>
+                                    <td><strong>Ativo</strong></td>
                                     <td><strong>Ações</strong></td>
                                 </tr>
                             </thead>
