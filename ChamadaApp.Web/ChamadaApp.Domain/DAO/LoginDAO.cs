@@ -12,14 +12,14 @@ namespace ChamadaApp.Domain.DAO
         /// <param name="login">login do usuario</param>
         /// <param name="senha">senha do usuario</param>
         /// <returns>retorna o usuario correspondente caso encontrado</returns>
-        public static UsuarioVO GetUserByLogin(string login, string senha)
+        public static UsuarioVO GetUserAutenticacao(string login, string senha)
         {
             UsuarioVO user = new UsuarioVO();
 
             try
             {
-                string getLogin = String.Format("SELECT * FROM USUARIO WHERE USUARIO.LOGIN = {0} AND " +
-                                                "USUARIO.SENHA = {1} AND USUARIO.ATIVO = 1", login, senha);
+                string getLogin = string.Format("SELECT * FROM USUARIO WHERE USUARIO.LOGIN = \'{0}\' AND " +
+                                                "USUARIO.SENHA = \'{1}\' AND USUARIO.TOKEN IS NULL AND USUARIO.ATIVO = 0", login, senha);
 
                 DataTable data = MetodosDAO.ExecutaSelect(getLogin);
 
@@ -35,5 +35,14 @@ namespace ChamadaApp.Domain.DAO
                 throw new Exception(erro.Message);
             }   
         }   
+
+        public static void Autenticar(UsuarioVO usuario)
+        {
+            string update = string.Format("UPDATE USUARIO SET USUARIO.TOKEN = \'{0}\', USUARIO.ATIVO = {1}, USUARIO.DTALTERACAO = \'{2}\' " +
+
+                                          " WHERE USUARIO.ID = {3}", usuario.Token, 1, usuario.DtAlteracao, usuario.Id);
+
+            MetodosDAO.ExecutaSQL(update);
+        }
     }
 }

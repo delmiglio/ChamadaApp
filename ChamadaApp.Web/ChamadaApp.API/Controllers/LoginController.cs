@@ -1,6 +1,7 @@
 ﻿using ChamadaApp.Api.Utils;
 using ChamadaApp.Domain.DAO;
 using ChamadaApp.Domain.VO;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -11,34 +12,49 @@ namespace ChamadaApp.Api.Controllers
     [RoutePrefix("api/login")]
     public class LoginController : ApiController
     {
-        [HttpGet]
-        public HttpResponseMessage GetUsuarioByLogin(string login, string senha)
+        [HttpPost]
+        [ActionName("Autenticar")]
+        public HttpResponseMessage PostUsuarioAutenticacao([FromBody] UsuarioVO usuario)
         {
             Retorno obj = new Retorno();
 
-            //Verifica se os parametros foram informados.
-            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(senha))
+            if (string.IsNullOrWhiteSpace(usuario.Token) && !usuario.Ativo)
             {
-                obj.TpRetorno = (int)TpRetornoEnum.Erro;
-                obj.RetornoMensagem = "Login Inválido!";
-                obj.RetornoDescricao = "Para efetuar o login, deverá ser informado os campos Login e Senha.";
-            }
-            else
-            {
-                UsuarioVO user = LoginDAO.GetUserByLogin(login, senha);
-
-                if (user == null)
+                //Verifica se os parametros foram informados.
+                if (string.IsNullOrWhiteSpace(usuario.Login) || string.IsNullOrWhiteSpace(usuario.Senha))
                 {
-                    obj.TpRetorno = (int)TpRetornoEnum.SemRetorno;
+                    obj.TpRetorno = (int)TpRetornoEnum.Erro;
                     obj.RetornoMensagem = "Login Inválido!";
-                    obj.RetornoDescricao = "Verifique se as credenciais estão corretas!";
+                    obj.RetornoDescricao = "Para efetuar o login, deverá ser informado os campos Login e Senha.";
                 }
                 else
                 {
-                    obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
-                    obj.ObjRetorno = user;
-                    obj.ObjTypeName = user.GetType().Name;
+                    UsuarioVO user = LoginDAO.GetUserAutenticacao(usuario.Login, usuario.Senha);
+
+                    if (user == null)
+                    {
+                        obj.TpRetorno = (int)TpRetornoEnum.SemRetorno;
+                        obj.RetornoMensagem = "Login Inválido!";
+                        obj.RetornoDescricao = "Verifique se as credenciais estão corretas!";
+                    }
+                    else
+                    {
+                        user.Token = Guid.NewGuid().ToString();
+                        user.Ativo = true;
+
+                        obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
+                        obj.ObjRetorno = user;
+                        obj.ObjTypeName = user.GetType().Name;
+                    }
                 }
+            }
+            else
+            {
+                usuario.DtAlteracao = DateTime.Now.ToShortDateString();
+
+                LoginDAO.Autenticar(usuario);
+
+                obj.TpRetorno = (int)TpRetornoEnum.Sucesso;                                
             }
 
             return new HttpResponseMessage()
