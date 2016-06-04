@@ -44,5 +44,19 @@ namespace ChamadaApp.Domain.DAO
 
             MetodosDAO.ExecutaSQL(update);
         }
+
+        public static bool ValidaAcesso(UsuarioVO usuario)
+        {
+            string query = string.Format("SELECT * FROM USUARIO WHERE USUARIO.LOGIN = \'{0}\' AND USUARIO.SENHA = \'{1}\' AND USUARIO.TOKEN = \'{2}\' " + 
+                                         
+                                         " AND USUARIO.ATIVO = 1", usuario.Login, usuario.Senha, usuario.Token);
+
+            DataTable data = MetodosDAO.ExecutaSelect(query);
+
+            if (data.Rows.Count == 1)
+                return true;
+            else
+                return false;
+        }
     }
 }

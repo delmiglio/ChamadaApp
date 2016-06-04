@@ -64,10 +64,34 @@ namespace ChamadaApp.Api.Controllers
             };
         }
 
-        [HttpGet]
-        public HttpResponseMessage GetValidaAcesso()
+        [HttpPost]
+        [ActionName("ValidaAcesso")]
+        public HttpResponseMessage PostValidaAcesso([FromBody] UsuarioVO usuario)
         {
-            Retorno obj = new Retorno();            
+            Retorno obj = new Retorno(); 
+            
+            if(usuario.Id == 0 || string.IsNullOrWhiteSpace(usuario.Login) || string.IsNullOrWhiteSpace(usuario.Senha) || string.IsNullOrWhiteSpace(usuario.Token))
+            {
+                obj.TpRetorno = (int)TpRetornoEnum.Erro;
+                obj.RetornoMensagem = "Acesso Inválido";
+                obj.RetornoDescricao = "Compareça a secretaria da instituição para verificar o ocorrido.";
+            }
+            else
+            {
+                bool resposta = LoginDAO.ValidaAcesso(usuario);
+
+                if (resposta)
+                {
+                    obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
+                    obj.RetornoMensagem = "Acesso Valido";
+                }
+                else
+                {
+                    obj.TpRetorno = (int)TpRetornoEnum.Erro;
+                    obj.RetornoMensagem = "Acesso Inválido";
+                    obj.RetornoDescricao = "Compareça a secretaria da instituição para verificar o ocorrido.";
+                }
+            }
 
             return new HttpResponseMessage()
             {
