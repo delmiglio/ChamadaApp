@@ -13,24 +13,32 @@ namespace ChamadaApp.Api.Controllers
     public class UsuarioController : ApiController
     {
         [HttpPost]
-        [Route("gerarSenha")]
-        public async Task<HttpResponseMessage> GerarSenha(AlunoVO aluno)
+        [ActionName("GerarSenha")]
+        public HttpResponseMessage GerarSenha(UsuarioVO usuario)
         {
-            string token = Metodos.GerarToken();
+            Retorno obj = new Retorno();
 
-            var retorno = new Retorno()
+            if (usuario.Id > 0)
             {
-                RetornoMensagem = "Funcionou!!!",
-                RetornoDescricao = token,
-                ObjRetorno = aluno,
-                ObjTypeName = GetType().Name,
-                TpRetorno = (int)TpRetornoEnum.Sucesso
+                usuario.Senha = Metodos.GerarSenha();//Atribui nova senha de acesso
+                usuario.Token = null;
+                usuario.Ativo = false;
 
-            };
+                obj.ObjRetorno = UsuarioDAO.ResetaSenhaAutenticacao(usuario);
+                obj.TpRetorno = (int)TpRetornoEnum.Sucesso;
+                obj.RetornoMensagem = "Senha Alterada!";
+                obj.RetornoDescricao = "A senha do usuário " + (obj.ObjRetorno as UsuarioVO).ToString() + " foi alterada.";
+            }
+            else
+            {
+                obj.TpRetorno = (int)TpRetornoEnum.Erro;
+                obj.RetornoMensagem = "Erro";
+                obj.RetornoDescricao = "Ocorreu um erro na requisição!";
+            }           
 
             return new HttpResponseMessage
             {
-                Content = new StringContent(Metodos.ObjectToJson(retorno)),
+                Content = new StringContent(Metodos.ObjectToJson(obj)),
                 StatusCode = HttpStatusCode.OK
             };
         }

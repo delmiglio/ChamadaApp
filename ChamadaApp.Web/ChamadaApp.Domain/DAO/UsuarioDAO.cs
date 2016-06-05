@@ -41,5 +41,27 @@ namespace ChamadaApp.Domain.DAO
                 return usuarios;
             }
         }
+
+        public static UsuarioVO ResetaSenhaAutenticacao(UsuarioVO usuario)
+        {
+            string update = string.Format("UPDATE USUARIO SET USUARIO.SENHA = \'{0}\', USUARIO.TOKEN = NULL, USUARIO.DTALTERACAO = \'{1}\', USUARIO.ATIVO = 0 " + 
+
+                                          " WHERE USUARIO.ID = {2}", usuario.Senha, DateTime.Now.ToShortDateString(), usuario.Id);
+
+            MetodosDAO.ExecutaSQL(update);
+
+            string query = string.Format("SELECT USUARIO.*, TPUSUARIO.DESCRICAO " +
+
+                           " FROM USUARIO INNER JOIN TPUSUARIO ON TPUSUARIO.ID = USUARIO.TPUSUARIOID " +
+                           
+                           " WHERE USUARIO.ID = {0}", usuario.Id);
+
+            DataTable data = MetodosDAO.ExecutaSelect(query);
+
+            if (data.Rows.Count == 1)
+                return new UsuarioVO(data.Rows[0]);
+            else
+                return null;
+        }
     }
 }

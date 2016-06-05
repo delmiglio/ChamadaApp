@@ -67,18 +67,18 @@ namespace ChamadaApp.Api.Utils
             return novaLista;
         }
 
-        public static string GerarToken()
+        public static string GerarSenha()
         {
-            string token = "";
+            string senha = "";
             Random randon = new Random();
 
             for (int n = 0; n < 4; n++)
-                token += (char)randon.Next(96, 123);
+                senha += (char)randon.Next(96, 123);
 
             for (int n = 0; n < 2; n++)
-                token += randon.Next(0, 10);
+                senha += randon.Next(0, 10);
 
-            return token;
+            return senha;
         }
     }
 }
