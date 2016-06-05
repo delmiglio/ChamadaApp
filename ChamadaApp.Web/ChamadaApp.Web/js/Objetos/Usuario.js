@@ -8,7 +8,7 @@
 
     toastr.success("A senha do usuário: '"+ Login +"' foi alterada.", "Informção");
 
-    GetUsuarios(Login, null).delay(300);
+    GetUsuarios(Login, null);
 }
 
 function Usuario() {
