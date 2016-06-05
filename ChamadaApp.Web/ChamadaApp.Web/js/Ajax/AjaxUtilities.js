@@ -12,11 +12,11 @@ function GetGenerico(url) {
     return dataEmJson;
 }
 
-function PostGenerico(url, objeto) {
+function PostGenerico(url, objeto) {    
     $.ajax({
         url: url,
         accepts: "application/json",
-        async: true,
+        async: false,
         cache: true,
         contentType: "application/json",
         crossDomain: true,
@@ -25,20 +25,18 @@ function PostGenerico(url, objeto) {
         error: function (response) {
             toastr.error("Um Erro Aconteceu \n Detalhes:" + response.data.error);
         },
-        success: function (response) {
-            toastr.success("Operação Realizada com Sucesso");
+        success: function (response) {            
+            //toastr.success("Operação Realizada com Sucesso");
         },
         method: 'POST',
-    });
+    });    
 }
-
-
 
 function DeleteGenerico(url, id) {
     $.ajax({
         url: url + "?id=" + id,
         accepts: "application/json",
-        async: true,
+        async: false,
         cache: true,
         contentType: "application/json",
         crossDomain: true,
@@ -52,7 +50,6 @@ function DeleteGenerico(url, id) {
         method: 'DELETE',
     });
 }
-
 
 function PutGenerico(url, objeto) {
     $.ajax({
@@ -68,7 +65,7 @@ function PutGenerico(url, objeto) {
             toastr.error("Um Erro Aconteceu \n Detalhes:" + response.data.error);
         },
         success: function (response) {
-            toastr.success("Operação Realizada com Sucesso");
+            toastr.success("Operação Realizada com Sucesso");           
         },
         method: 'PUT',
     });

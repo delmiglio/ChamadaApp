@@ -46,5 +46,10 @@ namespace ChamadaApp.Domain.VO
         public bool Ativo { get; set; }
 
         public string TpUsuarioDesc { get; set; }
+
+        public override string ToString()
+        {
+            return string.Concat(Nome, " ", Sobrenome);
+        }
     }
 }
