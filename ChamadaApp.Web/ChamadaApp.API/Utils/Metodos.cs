@@ -70,15 +70,19 @@ namespace ChamadaApp.Api.Utils
         public static string GerarSenha()
         {
             string senha = "";
-            Random randon = new Random();
+            Random random = new Random();
 
-            for (int n = 0; n < 4; n++)
-                senha += (char)randon.Next(96, 123);
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";          
 
+            var result = new string(
+                Enumerable.Repeat(chars, 4)
+                          .Select(s => s[random.Next(s.Length)])
+                          .ToArray());         
+            
             for (int n = 0; n < 2; n++)
-                senha += randon.Next(0, 10);
+                senha += random.Next(0, 10);
 
-            return senha;
+            return string.Concat(result.ToLower(), senha);
         }
     }
 }
