@@ -12,7 +12,8 @@ function GetGenerico(url) {
     return dataEmJson;
 }
 
-function PostGenerico(url, objeto) {    
+function PostGenerico(url, objeto) {
+    var obj = "";
     $.ajax({
         url: url,
         accepts: "application/json",
@@ -26,10 +27,11 @@ function PostGenerico(url, objeto) {
             toastr.error("Um Erro Aconteceu \n Detalhes:" + response.data.error);
         },
         success: function (response) {            
-            //toastr.success("Operação Realizada com Sucesso");
+            obj = response;
         },
         method: 'POST',
-    });    
+    });
+    return obj;
 }
 
 function DeleteGenerico(url, id) {

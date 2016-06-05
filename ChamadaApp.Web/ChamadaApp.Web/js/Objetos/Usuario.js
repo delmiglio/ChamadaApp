@@ -1,14 +1,19 @@
-﻿function GerarSenha(userId, Login) {      
+﻿function GerarSenha(userId) {      
+
+    var obj = "";
 
     if (userId != null) {
         var usuario = new Usuario();
         usuario.Id = userId;
-        PostGenerico("http://localhost/api/usuario/GerarSenha", usuario);
+
+        obj = PostGenerico("http://localhost/api/usuario/GerarSenha", usuario);
     }
 
-    toastr.success("A senha do usuário: '"+ Login +"' foi alterada.", "Informção");
-
-    GetUsuarios(Login, null);
+    if (obj != null) {
+        toastr.success(obj.RetornoDescricao, obj.RetornoMensagem);
+        $("#corpoTabelaAluno").empty();
+        MontaTabelaUsuarios(obj.ObjRetorno);
+    }
 }
 
 function Usuario() {
@@ -30,8 +35,10 @@ function GetUsuarios(ra, nome) {
 
     var alunos = GetGenerico(url);
 
-    if (alunos.ListRetorno.length > 0) {        
-        MontaTabelaAlunos(alunos.ListRetorno);
+    if (alunos.ListRetorno.length > 0) {
+        for (var i = 0; i < alunos.ListRetorno.length; i++){
+            MontaTabelaUsuarios(alunos.ListRetorno[i]);
+        }
     }
     else {
         toastr.info("não há resultados correspondentes a esses filtros","Informação");

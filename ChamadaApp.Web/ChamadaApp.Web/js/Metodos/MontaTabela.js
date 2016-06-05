@@ -1,11 +1,6 @@
-﻿function MontaTabelaAlunos(lista) {
+﻿function MontaTabelaUsuarios(objeto) {
 
-    var rows;
-
-    for (var i = 0; i < lista.length; i++) {
-        var objeto = lista[i];
-
-        rows += "<tr>" +
+    var row = "<tr>" +
         "<td> " + objeto.Login + "</td>" +
         "<td> " + objeto.Nome + "</td>" +
         "<td> " + objeto.Sobrenome + "</td>" +
@@ -13,12 +8,11 @@
         "<td> " + objeto.Senha + "</td>" +
         "<td> " + objeto.Ativo + "</td>" +
         "<td> " +
-            "<a class=\"btnGerarSenha btn btn-primary\" href=\"javascript:GerarSenha('"+objeto.Id+"','"+objeto.Login+"')\">Gerar Senha</a>" +
+            "<a class=\"btnGerarSenha btn btn-primary\" href=\"javascript:GerarSenha('"+objeto.Id+"')\">Gerar Senha</a>" +
         "</td>" +
-        "</tr>";       
-    }
+        "</tr>";
 
-    $("#corpoTabelaAluno").append(rows);   
+    $("#corpoTabelaAluno").append(row);   
 }
 
 function MontaTabelaChamada(objeto) {
